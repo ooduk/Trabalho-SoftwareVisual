@@ -5,23 +5,26 @@ using ApiBackend.Models;
 namespace apiBackend.Controllers
 {
     [ApiController]
-    [Route("api/time")]
+    [Route("api/confronto")]
 
-    public class TimeController : ControllerBase
+    public class ConfrontoController : ControllerBase
     {
         private readonly AppDataContext _ctx;
 
-        public TimeController(AppDataContext ctx) => _ctx = ctx;
+        public ConfrontoController(AppDataContext ctx) => _ctx = ctx;
 
         [HttpPost, Route("cadastrar")]
 
-        public IActionResult Cadastrar([FromBody] Time time)
+        public IActionResult Cadastrar([FromBody] Confronto confronto)
         {
             try
             {
-                _ctx.Times.Add(time);
+                confronto.CampeonatoId = _ctx.Campeonatos.Find(confronto.CampeonatoId);
+                confronto.TimeCasaId = _ctx.Times.Find(confronto.TimeCasaId);
+                confronto.TimeForaId = _ctx.Times.Find(confronto.TimeForaId);
+                _ctx.Times.Add(confronto);
                 _ctx.SaveChanges();
-                return Created("", time);
+                return Created("", confronto);
             }
             catch (Exception e)
             {
@@ -33,8 +36,8 @@ namespace apiBackend.Controllers
 
         public IActionResult Listar()
         {
-            List<Time> times = _ctx.Times.ToList();
-            return times.Count == 0 ? NotFound() : Ok(times);
+            List<Confronto> confrontos = _ctx.Confrontos.ToList();
+            return confrontos.Count == 0 ? NotFound() : Ok(confrontos);
         }
 
         [HttpGet, Route("consultar/{id}")]
@@ -42,11 +45,11 @@ namespace apiBackend.Controllers
         {
             try
             {
-                foreach (Time TimeCadastrado in _ctx.Times.ToList())
+                foreach (Confronto ConfrontoCadastrado in _ctx.Confrontos.ToList())
                 {
-                    if (TimeCadastrado.TimeId == id)
+                    if (ConfrontoCadastrado.ConfrontoIdId == id)
                     {
-                        return Ok(TimeCadastrado);
+                        return Ok(ConfrontoCadastrado);
                     }
                 }
 
@@ -60,19 +63,19 @@ namespace apiBackend.Controllers
         }
 
         [HttpPut, Route("atualizar/{id}")]
-        public IActionResult Atualizar([FromBody] Time time, [FromRoute] int id)
+        public IActionResult Atualizar([FromBody] Confronto confronto, [FromRoute] int id)
         {
             try
             {
 
-                Time? TimeEncontrado = _ctx.Times.FirstOrDefault(x => x.TimeId == id);
+                Confronto? ConfrontoEncontrado = _ctx.Confrontos.FirstOrDefault(x => x.ConfrontoId == id);
 
-                if (TimeEncontrado != null)
+                if (ConfrontoEncontrado != null)
                 {
-                    TimeEncontrado.Nome = time.Nome;
-                    _ctx.Times.Update(TimeEncontrado);
+                    ConfrontoEncontrado.Nome = Confronto.Nome;
+                    _ctx.Confrontos.Update(ConfrontoEncontrado);
                     _ctx.SaveChanges();
-                    return Ok(time);
+                    return Ok(Confronto);
                 }
 
                 return NotFound();
@@ -89,13 +92,13 @@ namespace apiBackend.Controllers
 
             try
             {
-                Time? time = _ctx.Times.Find(id);
+                Confronto? confronto = _ctx.Confrontos.Find(id);
 
-                if (time != null)
+                if (confronto != null)
                 {
-                    _ctx.Times.Remove(time);
+                    _ctx.Confrontos.Remove(confronto);
                     _ctx.SaveChanges();
-                    return Ok("Time Deletado!");
+                    return Ok("Confronto Deletado!");
                 }
 
                 return NotFound();

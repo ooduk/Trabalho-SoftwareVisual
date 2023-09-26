@@ -14,4 +14,8 @@ public class AppDataContext : DbContext
 
     public DbSet<Time> Times { get; set; }
 
+    public DbSet<Tabela> Tabelas{ get; set; }
+
+    public DbSet<Confronto> Confrontos{ get; set; }
+
 }

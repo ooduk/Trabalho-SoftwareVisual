@@ -5,23 +5,25 @@ using ApiBackend.Models;
 namespace apiBackend.Controllers
 {
     [ApiController]
-    [Route("api/time")]
+    [Route("api/tabela")]
 
-    public class TimeController : ControllerBase
+    public class TabelaController : ControllerBase
     {
         private readonly AppDataContext _ctx;
 
-        public TimeController(AppDataContext ctx) => _ctx = ctx;
+        public TabelaController(AppDataContext ctx) => _ctx = ctx;
 
         [HttpPost, Route("cadastrar")]
 
-        public IActionResult Cadastrar([FromBody] Time time)
+        public IActionResult Cadastrar([FromBody] Tabela tabela)
         {
             try
             {
-                _ctx.Times.Add(time);
+                tabela.CampeonatoId = _ctx.Campeonatos.Find(tabela.CampeonatoId);
+                tabela.TimeId = _ctx.Times.Find(tabela.TimeId);
+                _ctx.Times.Add(tabela);
                 _ctx.SaveChanges();
-                return Created("", time);
+                return Created("", tabela);
             }
             catch (Exception e)
             {
@@ -33,8 +35,8 @@ namespace apiBackend.Controllers
 
         public IActionResult Listar()
         {
-            List<Time> times = _ctx.Times.ToList();
-            return times.Count == 0 ? NotFound() : Ok(times);
+            List<Tabela> tabelas = _ctx.Tabelas.ToList();
+            return tabelas.Count == 0 ? NotFound() : Ok(tabelas);
         }
 
         [HttpGet, Route("consultar/{id}")]
@@ -42,11 +44,11 @@ namespace apiBackend.Controllers
         {
             try
             {
-                foreach (Time TimeCadastrado in _ctx.Times.ToList())
+                foreach (Tabela TabelaCadastrado in _ctx.Tabelas.ToList())
                 {
-                    if (TimeCadastrado.TimeId == id)
+                    if (TabelaCadastrado.TabelaId == id)
                     {
-                        return Ok(TimeCadastrado);
+                        return Ok(TabelaCadastrado);
                     }
                 }
 
@@ -60,19 +62,19 @@ namespace apiBackend.Controllers
         }
 
         [HttpPut, Route("atualizar/{id}")]
-        public IActionResult Atualizar([FromBody] Time time, [FromRoute] int id)
+        public IActionResult Atualizar([FromBody] Tabela tabela, [FromRoute] int id)
         {
             try
             {
 
-                Time? TimeEncontrado = _ctx.Times.FirstOrDefault(x => x.TimeId == id);
+                Tabela? TabelaEncontrado = _ctx.Tabelas.FirstOrDefault(x => x.TabelaId == id);
 
-                if (TimeEncontrado != null)
+                if (TabelaEncontrado != null)
                 {
-                    TimeEncontrado.Nome = time.Nome;
-                    _ctx.Times.Update(TimeEncontrado);
+                    TabelaEncontrado.Nome = tabela.Nome;
+                    _ctx.Tabelas.Update(TabelaEncontrado);
                     _ctx.SaveChanges();
-                    return Ok(time);
+                    return Ok(tabela);
                 }
 
                 return NotFound();
@@ -89,13 +91,13 @@ namespace apiBackend.Controllers
 
             try
             {
-                Time? time = _ctx.Times.Find(id);
+                Tabela? tabela = _ctx.Tabelas.Find(id);
 
-                if (time != null)
+                if (tabela != null)
                 {
-                    _ctx.Times.Remove(time);
+                    _ctx.Tabelas.Remove(tabela);
                     _ctx.SaveChanges();
-                    return Ok("Time Deletado!");
+                    return Ok("Tabela Deletado!");
                 }
 
                 return NotFound();
