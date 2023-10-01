@@ -1,0 +1,27 @@
+GET https://localhost:7021/api/time/listar
+
+###
+
+POST https://localhost:7021/api/time/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Cianorte"
+}
+
+###
+
+GET https://localhost:7021/api/time/consultar/1
+
+###
+
+DELETE https://localhost:7021/api/time/deletar/7
+
+###
+
+PUT https://localhost:7021/api/time/atualizar/2
+Content-Type: application/json
+
+{
+    "nome": "Girona"
+}

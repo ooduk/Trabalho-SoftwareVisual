@@ -1,0 +1,29 @@
+GET https://localhost:7021/api/campeonato/listar
+
+###
+
+POST https://localhost:7021/api/campeonato/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Copa Brasil",
+    "premiacao": 100000.000
+}
+
+###
+
+GET https://localhost:7021/api/campeonato/consultar/1
+
+###
+
+DELETE https://localhost:7021/api/campeonato/deletar/3
+
+###
+
+PUT https://localhost:7021/api/campeonato/atualizar/4
+Content-Type: application/json
+
+{
+    "nome": "Copa do Brasil",
+    "premiacao": 180000.00
+}

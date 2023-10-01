@@ -1,5 +1,6 @@
 using ApiBackend.Data;
 using ApiBackend.Models;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace apiBackend.Controllers
@@ -19,9 +20,10 @@ namespace apiBackend.Controllers
         {
             try
             {
+                string retorno = $"Time Cadastrado:\n\nNome: {time.Nome}";
                 _ctx.Times.Add(time);
                 _ctx.SaveChanges();
-                return Created("", time);
+                return Created("", retorno);
             }
             catch (Exception e)
             {
@@ -34,7 +36,19 @@ namespace apiBackend.Controllers
         public IActionResult Listar()
         {
             List<Time> times = _ctx.Times.ToList();
-            return times.Count == 0 ? NotFound() : Ok(times);
+
+            string retorno = $"Time(s) Listado(s):\n\n";
+
+            if (times.Count() != 0)
+            {
+                foreach (var time in times)
+                {
+                    retorno += $"Nome: {time.Nome}\n\n";
+                }
+                return Ok(retorno);
+            }
+
+            return NotFound();
         }
 
         [HttpGet, Route("consultar/{id}")]
@@ -46,7 +60,8 @@ namespace apiBackend.Controllers
                 {
                     if (TimeCadastrado.TimeId == id)
                     {
-                        return Ok(TimeCadastrado);
+                        string retorno = $"Time Consultado:\n\nNome: {TimeCadastrado.Nome}";
+                        return Ok(retorno);
                     }
                 }
 
@@ -70,9 +85,10 @@ namespace apiBackend.Controllers
                 if (TimeEncontrado != null)
                 {
                     TimeEncontrado.Nome = time.Nome;
+                    string retorno = $"Time Atualizado:\n\nNome: {TimeEncontrado.Nome}";
                     _ctx.Times.Update(TimeEncontrado);
                     _ctx.SaveChanges();
-                    return Ok(time);
+                    return Ok(retorno);
                 }
 
                 return NotFound();
@@ -96,6 +112,27 @@ namespace apiBackend.Controllers
                     _ctx.Times.Remove(time);
                     _ctx.SaveChanges();
                     return Ok("Time Deletado!");
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost, Route("historico/{id}")]
+
+        public IActionResult Historico([FromRoute] int id)
+        {
+            try
+            {
+                Time? time = _ctx.Times.Find(id);
+
+                if (time != null)
+                {
+                    // Busca na tabela confrontos os últimos 5 registros que contém o id_dele nas colunas TimeFora ou TimeCasa
                 }
 
                 return NotFound();

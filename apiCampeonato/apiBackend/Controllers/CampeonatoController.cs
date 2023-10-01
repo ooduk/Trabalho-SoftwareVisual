@@ -19,9 +19,11 @@ namespace apiBackend.Controllers
         {
             try
             {
+
+                string retorno = $"Campeonato Cadastrado:\n\nNome {campeonato.Nome}\nPremiação: R${campeonato.Premiacao}";
                 _ctx.Campeonatos.Add(campeonato);
                 _ctx.SaveChanges();
-                return Created("", campeonato);
+                return Created("", retorno);
 
             }
             catch (Exception e)
@@ -36,7 +38,19 @@ namespace apiBackend.Controllers
         {
 
             List<Campeonato> campeonatos = _ctx.Campeonatos.ToList();
-            return campeonatos.Count == 0 ? NotFound() : Ok(campeonatos);
+
+            string retorno = "Campeonato(s) Listado(s):\n\n";
+
+            if (campeonatos.Count() != 0)
+            {
+                foreach (var campeonato in campeonatos)
+                {
+                    retorno += $"Nome: {campeonato.Nome}\nPremiação: R${campeonato.Premiacao}\n\n";
+                }
+                return Ok(retorno);
+            }
+
+            return NotFound();
 
         }
 
@@ -51,7 +65,8 @@ namespace apiBackend.Controllers
                 {
                     if (CampeonatoCadastrado.CampeonatoId == id)
                     {
-                        return Ok(CampeonatoCadastrado);
+                        string retorno = $"Campeonato Consultado:\n\nNome: {CampeonatoCadastrado.Nome}\nPremiação: R${CampeonatoCadastrado.Premiacao}";
+                        return Ok(retorno);
                     }
                 }
 
@@ -77,12 +92,57 @@ namespace apiBackend.Controllers
                 {
                     campeonatoEncontrado.Nome = campeonato.Nome;
                     campeonatoEncontrado.Premiacao = campeonato.Premiacao;
+                    string retorno = $"Campeonato Atualizado:\n\nNome: {campeonatoEncontrado.Nome}\nPremiação: R${campeonatoEncontrado.Premiacao}";
                     _ctx.Campeonatos.Update(campeonatoEncontrado);
                     _ctx.SaveChanges();
-                    return Ok(campeonato);
+                    return Ok(retorno);
                 }
 
                 return NotFound();
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete, Route("deletar/{id}")]
+        public IActionResult Deletar([FromRoute] int id)
+        {
+
+            try
+            {
+                Campeonato? Campeonato = _ctx.Campeonatos.Find(id);
+
+                if (Campeonato != null)
+                {
+                    _ctx.Campeonatos.Remove(Campeonato);
+                    _ctx.SaveChanges();
+                    return Ok("Campeonato Deletado!");
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost, Route("analisar/{id}")]
+
+        public IActionResult Analisar([FromRoute] int id)
+        {
+            try
+            {
+                Campeonato? campeonato = _ctx.Campeonatos.Find(id);
+
+                // Busca na tabela onde possui o id_desse campeonato, o time que possui mais vitorias, empates e derrotas
+                // Busca na tabela onde possui o id_desse campeonato, o time que possui mais e menos gols marcados
+                // Junta todos esses dados e retorna
+
+                return Ok(campeonato);
 
             }
             catch (Exception e)

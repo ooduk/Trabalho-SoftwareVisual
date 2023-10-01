@@ -8,4 +8,5 @@ public class Campeonato
     public string? Nome { get; set; }
 
     public double Premiacao { get; set; }
+
 }
