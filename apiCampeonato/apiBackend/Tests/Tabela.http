@@ -7,11 +7,11 @@ Content-Type: application/json
 
 {
     "campeonatoId": 4,
-    "timeId": 15
+    "timeId": 19
 }
 
 ###
-GET https://localhost:7021/api/tabela/consultar/1
+GET https://localhost:7021/api/tabela/consultar/4
 
 ###
 

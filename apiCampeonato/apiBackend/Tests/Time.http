@@ -6,7 +6,7 @@ POST https://localhost:7021/api/time/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Cianorte"
+    "nome": "Icasa"
 }
 
 ###
@@ -15,7 +15,7 @@ GET https://localhost:7021/api/time/consultar/1
 
 ###
 
-DELETE https://localhost:7021/api/time/deletar/7
+DELETE https://localhost:7021/api/time/deletar/15
 
 ###
 
@@ -25,3 +25,7 @@ Content-Type: application/json
 {
     "nome": "Girona"
 }
+
+###
+
+GET https://localhost:7021/api/time/historico/18

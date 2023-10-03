@@ -55,10 +55,14 @@ namespace apiBackend.Controllers
                 };
 
                 string retorno = $"Confronto Cadastrado:\n\nCampeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}";
+                
+                if(Resultado(confrontoRequest.TimeCasaId, confrontoRequest.TimeForaId, confrontoRequest.CampeonatoId, confrontoRequest.Gols_time_casa, confrontoRequest.Gols_time_fora)){
+                    _ctx.Confrontos.Add(confronto);
+                    _ctx.SaveChanges();
+                    return Created("", retorno);
+                }
+                return NotFound();
 
-                _ctx.Confrontos.Add(confronto);
-                _ctx.SaveChanges();
-                return Created("", retorno);
             }
             catch (Exception e)
             {
@@ -204,6 +208,120 @@ namespace apiBackend.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        public bool Resultado(int idTimeCasa, int idTimeFora, int idCampeonato, int golsCasa, int golsFora){
+            try {
+
+                if(golsCasa > golsFora){
+                    List<Tabela> timesVenceu = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato)
+                    .Where(t => t.TimeId == idTimeCasa)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .ToList();
+
+                    List<Tabela> timesPerdeu = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato)
+                    .Where(t => t.TimeId == idTimeFora)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .ToList();
+
+                    if((timesVenceu.Count != 1) || (timesPerdeu.Count != 1)){
+                        return false;
+                    }
+
+                    Vencer(timesVenceu, golsCasa, golsFora);
+                    Perder(timesPerdeu, golsFora, golsCasa);
+
+                    return true;
+                } else if(golsCasa < golsFora){
+                    List<Tabela> timesVenceu = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato)
+                    .Where(t => t.TimeId == idTimeFora)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .ToList();
+
+                    List<Tabela> timesPerdeu = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato)
+                    .Where(t => t.TimeId == idTimeCasa)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .ToList();
+
+                    if((timesVenceu.Count != 1) || (timesPerdeu.Count != 1)){
+                        return false;
+                    }
+
+                    Vencer(timesVenceu, golsFora, golsCasa);
+                    Perder(timesPerdeu, golsCasa, golsFora);
+
+                    return true;
+                }else {
+                    List<Tabela> timesEmpatouCasa = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato)
+                    .Where(t => t.TimeId == idTimeCasa)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .ToList();
+
+                    List<Tabela> timesEmpatouFora = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato)
+                    .Where(t => t.TimeId == idTimeFora)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .ToList();
+
+                    if((timesEmpatouCasa.Count != 1) || (timesEmpatouFora.Count != 1)){
+                        return false;
+                    }
+
+                    Empatar(timesEmpatouFora, golsFora, golsCasa);
+                    Empatar(timesEmpatouCasa, golsCasa, golsFora);
+
+                    return true;
+                }
+
+            } catch(Exception e){
+                 return false;
+            }
+        }
+         public void Vencer(List<Tabela> times, int golsMarcados, int golsSofridos){
+            foreach (var time in times)
+            {
+                time.Vitorias += 1;
+                time.Pontos+= 3;
+                time.Gols_marcados += golsMarcados;
+                time.Gols_contra += golsSofridos;
+                _ctx.Tabelas.Update(time);
+                _ctx.SaveChanges();
+            }
+        }
+
+         public void Perder(List<Tabela> times, int golsMarcados, int golsSofridos){
+      
+            foreach (var time in times)
+            {
+                time.Derrotas += 1;
+                time.Gols_marcados += golsMarcados;
+                time.Gols_contra += golsSofridos;
+                _ctx.Tabelas.Update(time);
+                _ctx.SaveChanges();
+            }
+        }
+
+        public void Empatar(List<Tabela> times, int golsMarcados, int golsSofridos){
+            foreach (var time in times)
+            {
+                time.Empates += 1;
+                time.Pontos+= 1;
+                time.Gols_marcados += golsMarcados;
+                time.Gols_contra += golsSofridos;
+                _ctx.Tabelas.Update(time);
+                _ctx.SaveChanges();
             }
         }
     }

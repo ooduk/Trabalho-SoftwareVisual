@@ -6,12 +6,11 @@ POST https://localhost:7021/api/confronto/cadastrar
 Content-Type: application/json
 
 {
-    "timeCasaId": 15,
-    "timeForaId": 8,
+    "timeCasaId": 18,
+    "timeForaId": 19,
     "campeonatoId": 4,
-    "pontos": 0,
-    "gols_time_casa": 0,
-    "gols_time_fora": 0
+    "gols_time_casa": 4,
+    "gols_time_fora": 2
 }
 
 ###
