@@ -35,5 +35,4 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7021/api/tabela/classificacao/1
 

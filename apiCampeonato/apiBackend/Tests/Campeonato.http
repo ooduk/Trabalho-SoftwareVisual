@@ -31,3 +31,7 @@ Content-Type: application/json
 ###
 
 GET https://localhost:7021/api/campeonato/analisar/4
+
+###
+
+GET https://localhost:7021/api/campeonato/classificacao/4

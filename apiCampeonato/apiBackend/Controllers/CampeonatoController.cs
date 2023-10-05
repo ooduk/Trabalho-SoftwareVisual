@@ -185,5 +185,47 @@ namespace apiBackend.Controllers
             }
         }
 
+          [HttpGet, Route("classificacao/{id}")]
+
+        public IActionResult Classificacao([FromRoute] int id)
+        {
+            try
+            {
+                List<TabelaReturn> times = _ctx.Tabelas
+                .Where(t => t.CampeonatoId == id)
+                .Include(t => t.Time)
+                .Include(c => c.Campeonato)
+                .OrderByDescending(t => t.Pontos)
+                .Select(t => new TabelaReturn
+                {
+                    TimeNome = t.Time.Nome,
+                    CampeonatoNome = t.Campeonato.Nome,
+                    Pontos = t.Pontos,
+                })
+                .ToList();
+
+                if (times.Count() != 0)
+                {
+                    var campeonatoNome = times.First().CampeonatoNome;
+                    string retorno = $"Classificação: {campeonatoNome}\n\n";
+
+                    int classificacao = 1;
+
+                    foreach (var time in times)
+                    {
+                        retorno += $"{classificacao}º {time.TimeNome} - {time.Pontos} Ponto(s)\n";
+                        classificacao++;
+                    }
+                    return Ok(retorno);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }
