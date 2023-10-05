@@ -27,3 +27,7 @@ Content-Type: application/json
     "nome": "Copa do Brasil",
     "premiacao": 180000.00
 }
+
+###
+
+GET https://localhost:7021/api/campeonato/analisar/4

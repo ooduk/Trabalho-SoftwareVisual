@@ -1,6 +1,8 @@
 using ApiBackend.Data;
 using ApiBackend.Models;
 using Microsoft.AspNetCore.Mvc;
+using ApiBackend.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiBackend.Controllers
 {
@@ -130,7 +132,7 @@ namespace apiBackend.Controllers
             }
         }
 
-        [HttpPost, Route("analisar/{id}")]
+        [HttpGet, Route("analisar/{id}")]
 
         public IActionResult Analisar([FromRoute] int id)
         {
@@ -138,12 +140,44 @@ namespace apiBackend.Controllers
             {
                 Campeonato? campeonato = _ctx.Campeonatos.Find(id);
 
-                // Busca na tabela onde possui o id_desse campeonato, o time que possui mais vitorias, empates e derrotas
-                // Busca na tabela onde possui o id_desse campeonato, o time que possui mais e menos gols marcados
-                // Junta todos esses dados e retorna
+                List<TabelaReturn> times = _ctx.Tabelas
+                .Where(t => t.CampeonatoId == id)
+                .Include(t => t.Time)
+                .Include(c => c.Campeonato)
+                .Select(t => new TabelaReturn
+                {
+                    TimeNome = t.Time.Nome,
+                    CampeonatoNome = t.Campeonato.Nome,
+                    Pontos = t.Pontos,
+                    Gols_marcados = t.Gols_marcados,
+                    Gols_contra = t.Gols_contra,
+                    Vitorias = t.Vitorias,
+                    Empates = t.Empates,
+                    Derrotas = t.Derrotas
+                })
+                .ToList();
 
-                return Ok(campeonato);
+                if (times.Count() != 0)
+                {
 
+                    var campeonatoNome = times.First().CampeonatoNome;
+
+                    string retorno = $"Análise do {campeonatoNome}:\n\n";
+
+                    var timeVitorias = times.OrderByDescending(t => t.Vitorias).First().TimeNome;
+                    var timeDerrotas = times.OrderByDescending(t => t.Derrotas).First().TimeNome;
+                    var timeEmpates = times.OrderByDescending(t => t.Empates).First().TimeNome;
+                    var timeMaisGolsMarcados = times.OrderByDescending(t => t.Gols_marcados).First().TimeNome;
+                    var timeMenosGolsMarcados = times.OrderByDescending(t => t.Gols_marcados).Last().TimeNome;
+                    var timeMaisGolsSofridos = times.OrderByDescending(t => t.Gols_contra).First().TimeNome;
+                    var timeMenosGolsSofridos = times.OrderByDescending(t => t.Gols_contra).Last().TimeNome;
+                
+                    retorno += $"Time com Mais Vitórias: {timeVitorias}\nTime com Mais Derrotas: {timeDerrotas}\nTime com Mais Empates: {timeEmpates}\nTime com Mais Gols Marcados: {timeMaisGolsMarcados}\nTime com Menos Gols Marcados: {timeMenosGolsMarcados}\nTime com Mais Gols Sofridos: {timeMaisGolsSofridos}\nTime com Menos Gols Sofridos: {timeMenosGolsSofridos}";
+
+                    return Ok(retorno);
+                }
+
+                return NotFound();
             }
             catch (Exception e)
             {

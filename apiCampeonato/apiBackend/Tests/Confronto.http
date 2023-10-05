@@ -7,10 +7,10 @@ Content-Type: application/json
 
 {
     "timeCasaId": 18,
-    "timeForaId": 19,
-    "campeonatoId": 4,
-    "gols_time_casa": 4,
-    "gols_time_fora": 2
+    "timeForaId":16,
+    "campeonatoId": 1,
+    "gols_time_casa": 3,
+    "gols_time_fora": 4
 }
 
 ###

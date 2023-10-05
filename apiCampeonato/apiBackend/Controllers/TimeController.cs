@@ -2,6 +2,7 @@ using ApiBackend.Data;
 using ApiBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using ApiBackend.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiBackend.Controllers
 {
@@ -132,51 +133,36 @@ namespace apiBackend.Controllers
 
                 if (time != null)
                 {
-                        // List<ConfrontoReturn> confrontos = _ctx.Confrontos
-                        // // .Where(c => c.TimeCasaId == id)
-                        // // .Where(c => c.TimeForaId == id)
-                        // .Include(c => c.Campeonato)
-                        // .Include(c => c.TimeCasa)
-                        // .Include(c => c.TimeFora)     
-                        // .Select(c => new ConfrontoReturn
-                        // {
-                        //     TimeCasaNome = c.TimeCasa.Nome,
-                        //     TimeForaNome = c.TimeFora.Nome,
-                        //     CampeonatoNome = c.Campeonato.Nome,
-                        //     Gols_time_casa = c.Gols_time_casa,
-                        //     Gols_time_fora = c.Gols_time_fora   
-                        // })
-                        // .ToList();
 
-                        List<ConfrontoReturn> confrontos = _ctx.Confrontos
-                        .Include(c => c.Campeonato)
-                        .Include(c => c.TimeCasa)
-                        .Include(c => c.TimeFora)
-                        .Select(c => new ConfrontoReturn
+                    List<ConfrontoReturn> confrontos = _ctx.Confrontos
+                    .Include(c => c.Campeonato)
+                    .Include(c => c.TimeCasa)
+                    .Include(c => c.TimeFora)
+                    .Where(c => c.TimeForaId == id || c.TimeCasaId == id)
+                    .Select(c => new ConfrontoReturn
+                    {
+                        TimeCasaNome = c.TimeCasa.Nome,
+                        TimeForaNome = c.TimeFora.Nome,
+                        CampeonatoNome = c.Campeonato.Nome,
+                        Gols_time_casa = c.Gols_time_casa,
+                        Gols_time_fora = c.Gols_time_fora
+                    })
+                    .Take(5)
+                    .ToList();
+
+
+                    string retorno = "Histórico de Confronto(s):\n\n";
+
+                    if (confrontos.Count() != 0)
+                    {
+                        foreach (var confrontoReturn in confrontos)
                         {
-                            TimeCasaNome = c.TimeCasa.Nome,
-                            TimeForaNome = c.TimeFora.Nome,
-                            CampeonatoNome = c.Campeonato.Nome,
-                            Gols_time_casa = c.Gols_time_casa,
-                            Gols_time_fora = c.Gols_time_fora
-                        })
-                        .ToList();
-
-
-                        string retorno = "Histórico de Confronto(s):\n\n";
-
-                        if (confrontos.Count() != 0)
-                        {
-                            foreach (var confrontoReturn in confrontos)
-                            {
-                                retorno += $"Campeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}\n\n";
-                            }
-                            return Ok(retorno);
+                            retorno += $"Campeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}\n\n";
                         }
+                        return Ok(retorno);
+                    }
 
-                        return NotFound();
-
-                    // Busca na tabela confrontos os últimos 5 registros que contém o id_dele nas colunas TimeFora ou TimeCasa
+                    return NotFound();
                 }
 
                 return NotFound();

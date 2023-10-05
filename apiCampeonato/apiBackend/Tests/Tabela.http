@@ -6,12 +6,12 @@ POST https://localhost:7021/api/tabela/cadastrar
 Content-Type: application/json
 
 {
-    "campeonatoId": 4,
-    "timeId": 19
+    "campeonatoId": 1,
+    "timeId": 18
 }
 
 ###
-GET https://localhost:7021/api/tabela/consultar/4
+GET https://localhost:7021/api/tabela/consultar/1
 
 ###
 
@@ -32,3 +32,8 @@ Content-Type: application/json
     "empates": 0,
     "derrotas": 0
 }
+
+###
+
+GET https://localhost:7021/api/tabela/classificacao/1
+
