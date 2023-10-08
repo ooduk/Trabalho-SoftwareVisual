@@ -8,13 +8,50 @@ Content-Type: application/json
 {
     "timeCasaId": 1,
     "timeForaId": 2,
-    "campeonatoId": 4,
+    "campeonatoId": 1,
     "gols_time_casa": 3,
     "gols_time_fora": 2
 }
 
 ###
 
-GET https://localhost:7021/api/confronto/consultar/1
+POST https://localhost:7021/api/confronto/cadastrar
+Content-Type: application/json
+
+{
+    "timeCasaId": 1,
+    "timeForaId": 3,
+     "campeonatoId": 1,
+    "gols_time_casa": 0,
+    "gols_time_fora": 1
+}
 
 ###
+
+POST https://localhost:7021/api/confronto/cadastrar
+Content-Type: application/json
+
+{
+    "timeCasaId": 2,
+    "timeForaId": 4,
+     "campeonatoId": 1,
+    "gols_time_casa": 2,
+    "gols_time_fora": 1
+}
+
+###
+
+POST https://localhost:7021/api/confronto/cadastrar
+Content-Type: application/json
+
+{
+    "timeCasaId": 3,
+    "timeForaId": 4,
+     "campeonatoId": 1,
+    "gols_time_casa": 2,
+    "gols_time_fora": 2
+}
+
+###
+
+GET https://localhost:7021/api/confronto/consultar/1

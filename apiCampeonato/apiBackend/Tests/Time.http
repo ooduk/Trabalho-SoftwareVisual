@@ -6,7 +6,34 @@ POST https://localhost:7021/api/time/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "CRB"
+    "nome": "Flamengo"
+}
+
+###
+
+POST https://localhost:7021/api/time/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Fluminense"
+}
+
+###
+
+POST https://localhost:7021/api/time/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Vasco"
+}
+
+###
+
+POST https://localhost:7021/api/time/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Botafogo"
 }
 
 ###

@@ -280,7 +280,6 @@ namespace apiBackend.Controllers
                 .Include(t => t.Time)
                 .Include(c => c.Campeonato)
                 .OrderByDescending(t => t.Pontos)
-                .Take(3)
                 .Select(t => new TabelaReturn
                 {
                     TimeNome = t.Time.Nome,

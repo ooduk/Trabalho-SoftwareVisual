@@ -6,10 +6,40 @@ POST https://localhost:7021/api/tabela/cadastrar
 Content-Type: application/json
 
 {
-    "campeonatoId": 4,
+    "campeonatoId": 1,
+    "timeId": 1
+}
+
+###
+
+POST https://localhost:7021/api/tabela/cadastrar
+Content-Type: application/json
+
+{
+    "campeonatoId": 1,
     "timeId": 2
 }
 
 ###
-GET https://localhost:7021/api/tabela/consultar/4
+
+POST https://localhost:7021/api/tabela/cadastrar
+Content-Type: application/json
+
+{
+    "campeonatoId": 1,
+    "timeId": 3
+}
+
+###
+
+POST https://localhost:7021/api/tabela/cadastrar
+Content-Type: application/json
+
+{
+    "campeonatoId": 1,
+    "timeId": 4
+}
+
+###
+GET https://localhost:7021/api/tabela/consultar/1
 

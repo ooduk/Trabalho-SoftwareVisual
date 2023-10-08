@@ -12,34 +12,34 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7021/api/campeonato/consultar/10
+GET https://localhost:7021/api/campeonato/consultar/1
 
 ###
 
-DELETE https://localhost:7021/api/campeonato/deletar/2
+DELETE https://localhost:7021/api/campeonato/deletar/1
 
 ###
 
-PUT https://localhost:7021/api/campeonato/atualizar/10
+PUT https://localhost:7021/api/campeonato/atualizar/1
 Content-Type: application/json
 
 {
-    "nome": "Copa do Brasil",
+    "nome": "Campeonato Carioca",
     "premiacao": 18000000
 }
 
 ###
 
-GET https://localhost:7021/api/campeonato/analisar/2
+GET https://localhost:7021/api/campeonato/analisar/1
 
 ###
 
-GET https://localhost:7021/api/campeonato/classificacao/4
+GET https://localhost:7021/api/campeonato/classificacao/1
 
 ###
 
-GET https://localhost:7021/api/campeonato/classificacaoDetalhes/2
+GET https://localhost:7021/api/campeonato/classificacaoDetalhes/1
 
 ### 
 
-GET https://localhost:7021/api/campeonato/finalizar/4
+GET https://localhost:7021/api/campeonato/finalizar/1
