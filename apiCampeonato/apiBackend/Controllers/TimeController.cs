@@ -1,11 +1,11 @@
-using ApiBackend.Data;
-using ApiBackend.Models;
-using Microsoft.AspNetCore.Mvc;
-using ApiBackend.DTOs;
-using Microsoft.EntityFrameworkCore;
-
 namespace apiBackend.Controllers
 {
+    using ApiBackend.Data;
+    using ApiBackend.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using ApiBackend.DTOs;
+    using Microsoft.EntityFrameworkCore;
+
     [ApiController]
     [Route("api/time")]
 
@@ -21,9 +21,11 @@ namespace apiBackend.Controllers
         {
             try
             {
-                string retorno = $"Time Cadastrado:\n\nNome: {time.Nome}";
                 _ctx.Times.Add(time);
                 _ctx.SaveChanges();
+
+                string retorno = $"Time Cadastrado:\n\nNome: {time.Nome}";
+
                 return Created("", retorno);
             }
             catch (Exception e)
@@ -36,20 +38,27 @@ namespace apiBackend.Controllers
 
         public IActionResult Listar()
         {
-            List<Time> times = _ctx.Times.ToList();
-
-            string retorno = $"Time(s) Listado(s):\n\n";
-
-            if (times.Count() != 0)
+            try
             {
-                foreach (var time in times)
-                {
-                    retorno += $"Nome: {time.Nome}\n\n";
-                }
-                return Ok(retorno);
-            }
+                List<Time> times = _ctx.Times.ToList();
 
-            return NotFound();
+                if (times.Count() != 0)
+                {
+                    string retorno = $"Time(s) Listado(s):\n\n";
+
+                    foreach (var time in times)
+                    {
+                        retorno += $"Nome: {time.Nome}\n\n";
+                    }
+
+                    return Ok(retorno);
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet, Route("consultar/{id}")]
@@ -57,18 +66,16 @@ namespace apiBackend.Controllers
         {
             try
             {
-                foreach (Time TimeCadastrado in _ctx.Times.ToList())
-                {
-                    if (TimeCadastrado.TimeId == id)
-                    {
-                        string retorno = $"Time Consultado:\n\nNome: {TimeCadastrado.Nome}";
-                        return Ok(retorno);
-                    }
-                }
+                Time? TimeCadastrado = _ctx.Times.FirstOrDefault(t => t.TimeId == id);
 
+                if (TimeCadastrado != null)
+                {
+                    string retorno = $"Time Consultado:\n\nNome: {TimeCadastrado.Nome}";
+
+                    return Ok(retorno);
+                }
                 return NotFound();
             }
-
             catch (Exception e)
             {
                 return BadRequest(e.Message);
@@ -80,18 +87,18 @@ namespace apiBackend.Controllers
         {
             try
             {
-
                 Time? TimeEncontrado = _ctx.Times.FirstOrDefault(x => x.TimeId == id);
 
                 if (TimeEncontrado != null)
                 {
                     TimeEncontrado.Nome = time.Nome;
-                    string retorno = $"Time Atualizado:\n\nNome: {TimeEncontrado.Nome}";
+
                     _ctx.Times.Update(TimeEncontrado);
                     _ctx.SaveChanges();
+
+                    string retorno = $"Time Atualizado:\n\nNome: {TimeEncontrado.Nome}";
                     return Ok(retorno);
                 }
-
                 return NotFound();
             }
             catch (Exception e)
@@ -103,7 +110,6 @@ namespace apiBackend.Controllers
         [HttpDelete, Route("deletar/{id}")]
         public IActionResult Deletar([FromRoute] int id)
         {
-
             try
             {
                 Time? time = _ctx.Times.Find(id);
@@ -112,9 +118,9 @@ namespace apiBackend.Controllers
                 {
                     _ctx.Times.Remove(time);
                     _ctx.SaveChanges();
+
                     return Ok("Time Deletado!");
                 }
-
                 return NotFound();
             }
             catch (Exception e)
@@ -133,7 +139,6 @@ namespace apiBackend.Controllers
 
                 if (time != null)
                 {
-
                     List<ConfrontoReturn> confrontos = _ctx.Confrontos
                     .Include(c => c.Campeonato)
                     .Include(c => c.TimeCasa)
@@ -150,21 +155,17 @@ namespace apiBackend.Controllers
                     .Take(5)
                     .ToList();
 
-
-                    string retorno = "Histórico de Confronto(s):\n\n";
-
                     if (confrontos.Count() != 0)
                     {
+                        string retorno = "Histórico de Confronto(s):\n\n";
+
                         foreach (var confrontoReturn in confrontos)
                         {
                             retorno += $"Campeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}\n\n";
                         }
                         return Ok(retorno);
                     }
-
-                    return NotFound();
                 }
-
                 return NotFound();
             }
             catch (Exception e)

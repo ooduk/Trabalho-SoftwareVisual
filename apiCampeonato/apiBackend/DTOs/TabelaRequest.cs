@@ -1,6 +1,6 @@
 namespace ApiBackend.DTOs;
 
-public class TabelaRequestPost
+public class TabelaRequest
 {
  
     public int CampeonatoId { get; set; }

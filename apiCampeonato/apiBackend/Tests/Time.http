@@ -6,20 +6,20 @@ POST https://localhost:7021/api/time/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Icasa"
+    "nome": "CRB"
 }
 
 ###
 
-GET https://localhost:7021/api/time/consultar/1
+GET https://localhost:7021/api/time/consultar/19
 
 ###
 
-DELETE https://localhost:7021/api/time/deletar/15
+DELETE https://localhost:7021/api/time/deletar/21
 
 ###
 
-PUT https://localhost:7021/api/time/atualizar/2
+PUT https://localhost:7021/api/time/atualizar/21
 Content-Type: application/json
 
 {
@@ -28,4 +28,4 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7021/api/time/historico/20
+GET https://localhost:7021/api/time/historico/1

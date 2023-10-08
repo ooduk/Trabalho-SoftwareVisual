@@ -6,36 +6,40 @@ POST https://localhost:7021/api/campeonato/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Copa Brasil",
-    "premiacao": 100000.000
+    "nome": "Copa do Brasil",
+    "premiacao": 10000000
 }
 
 ###
 
-GET https://localhost:7021/api/campeonato/consultar/1
+GET https://localhost:7021/api/campeonato/consultar/10
 
 ###
 
-DELETE https://localhost:7021/api/campeonato/deletar/3
+DELETE https://localhost:7021/api/campeonato/deletar/2
 
 ###
 
-PUT https://localhost:7021/api/campeonato/atualizar/4
+PUT https://localhost:7021/api/campeonato/atualizar/10
 Content-Type: application/json
 
 {
     "nome": "Copa do Brasil",
-    "premiacao": 180000.00
+    "premiacao": 18000000
 }
 
 ###
 
-GET https://localhost:7021/api/campeonato/analisar/4
+GET https://localhost:7021/api/campeonato/analisar/2
 
 ###
 
-GET https://localhost:7021/api/campeonato/classificacao/1
+GET https://localhost:7021/api/campeonato/classificacao/4
 
 ###
 
-GET https://localhost:7021/api/campeonato/terminarcamp/1
+GET https://localhost:7021/api/campeonato/classificacaoDetalhes/2
+
+### 
+
+GET https://localhost:7021/api/campeonato/finalizar/4

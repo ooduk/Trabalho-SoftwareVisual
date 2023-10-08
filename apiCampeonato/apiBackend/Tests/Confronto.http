@@ -6,31 +6,15 @@ POST https://localhost:7021/api/confronto/cadastrar
 Content-Type: application/json
 
 {
-    "timeCasaId": 18,
-    "timeForaId":16,
-    "campeonatoId": 1,
-    "gols_time_casa": 3,
-    "gols_time_fora": 4
-}
-
-###
-
-GET https://localhost:7021/api/confronto/consultar/28
-
-###
-
-DELETE https://localhost:7021/api/confronto/deletar/7
-
-###
-
-PUT https://localhost:7021/api/confronto/atualizar/25
-Content-Type: application/json
-
-{
     "timeCasaId": 1,
-    "timeForaId": 1,
-    "campeonatoId": 1,
-    "pontos": 0,
-    "gols_time_casa": 0,
-    "gols_time_fora": 0
+    "timeForaId": 2,
+    "campeonatoId": 4,
+    "gols_time_casa": 3,
+    "gols_time_fora": 2
 }
+
+###
+
+GET https://localhost:7021/api/confronto/consultar/1
+
+###

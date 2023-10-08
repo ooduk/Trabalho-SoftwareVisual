@@ -9,6 +9,4 @@ public class Campeonato
 
     public double Premiacao { get; set; }
 
-    public List<Tabela> TabelaModels { get; set; }
-
 }
