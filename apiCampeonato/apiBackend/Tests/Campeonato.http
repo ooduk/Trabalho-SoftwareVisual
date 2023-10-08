@@ -34,4 +34,8 @@ GET https://localhost:7021/api/campeonato/analisar/4
 
 ###
 
-GET https://localhost:7021/api/campeonato/classificacao/4
+GET https://localhost:7021/api/campeonato/classificacao/1
+
+###
+
+GET https://localhost:7021/api/campeonato/terminarcamp/1

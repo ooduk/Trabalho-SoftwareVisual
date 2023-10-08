@@ -227,5 +227,57 @@ namespace apiBackend.Controllers
             }
         }
 
+
+        [HttpGet, Route("terminarcamp/{id}")]
+        public IActionResult TerminarCamp([FromRoute] int id)
+        {
+            try
+            {
+                List<TabelaReturn> times = _ctx.Tabelas
+                .Where(t => t.CampeonatoId == id)
+                .Include(t => t.Time)
+                .Include(c => c.Campeonato)
+                .OrderByDescending(t => t.Pontos)
+                .Take(3)
+                .Select(t => new TabelaReturn
+                {
+                    TimeNome = t.Time.Nome,
+                    CampeonatoNome = t.Campeonato.Nome,
+                    Pontos = t.Pontos,
+                })
+                .ToList();
+
+                if (times.Count != 0)
+                {
+                    var campeonatoNome = times.First().CampeonatoNome;
+                    string retorno = $"Classificação Final do Campeonato {campeonatoNome}:\n\n";
+
+                    var ganhador = times.First();
+                    retorno += $"Primeiro colocado: {ganhador.TimeNome} com {ganhador.Pontos} ponto(s)!\n";
+
+                    var ultimoColocado = times.Last();
+                    retorno += $"Último colocado: {ultimoColocado.TimeNome} com {ultimoColocado.Pontos} ponto(s)!\n";
+
+                    var campeonato = _ctx.Campeonatos.Find(id);
+                    if (campeonato != null)
+                    {
+                        _ctx.Campeonatos.Remove(campeonato);
+                        _ctx.SaveChanges();
+                        retorno += "Campeonato finalizado!";
+                    }
+                    else
+                    {
+                        retorno += "Campeonato não encontrado.";
+                    }
+                        return Ok(retorno);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
