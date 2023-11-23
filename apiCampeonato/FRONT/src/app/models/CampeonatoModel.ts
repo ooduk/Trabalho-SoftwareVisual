@@ -1,5 +1,5 @@
 export interface Campeonato {
-  CampeonatoId: number;
-  Nome: string;
-  Premiacao : string;
+  campeonatoId: number;
+  nome: string;
+  premiacao : string;
 }

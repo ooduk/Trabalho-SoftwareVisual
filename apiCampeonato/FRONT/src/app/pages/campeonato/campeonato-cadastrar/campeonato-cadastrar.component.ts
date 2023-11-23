@@ -23,9 +23,9 @@ export class CampeonatoCadastrarComponent {
 
   cadastrar(): void {
     let campeonato: Campeonato = {
-      CampeonatoId: this.campeonatoId,
-      Nome: this.nome,
-      Premiacao: this.premiacao,
+      campeonatoId: this.campeonatoId,
+      nome: this.nome,
+      premiacao: this.premiacao,
     };
 
     this.client

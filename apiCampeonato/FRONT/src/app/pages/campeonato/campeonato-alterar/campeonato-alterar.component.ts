@@ -37,9 +37,9 @@ export class CampeonatoAlterarComponent {
                 )
                 .subscribe({
                   next: (campeonatos) => {
-                    this.campeonatoId = campeonato.CampeonatoId;
-                    this.nome = campeonato.Nome;
-                    this.premiacao = campeonato.Premiacao;
+                    this.campeonatoId = campeonato.campeonatoId;
+                    this.nome = campeonato.nome;
+                    this.premiacao = campeonato.premiacao;
                   },
                   error: (erro) => {
                     console.log(erro);
@@ -57,9 +57,9 @@ export class CampeonatoAlterarComponent {
 
   alterar(): void {
     let campeonato: Campeonato = {
-      Nome: this.nome,
-      Premiacao: this.premiacao,
-      CampeonatoId: 0
+      nome: this.nome,
+      premiacao: this.premiacao,
+      campeonatoId: 0
     };
 
     console.log(campeonato);

@@ -11,11 +11,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let campeonato of campeonatos">
-          <td>{{ campeonato.id }}</td>
-          <td>{{ campeonato.nome }}</td>
-          <td>{{ campeonato.premiacao }}</td>
+          <td>{{ campeonato?.campeonatoId }}</td>
+          <td>{{ campeonato?.nome }}</td>
+          <td>{{ campeonato?.premiacao }}</td>
           <td>
-            <button class="btn-deletar" (click)="deletar(campeonato.id)">Deletar</button>
+            <button class="btn-deletar" (click)="deletar(campeonato?.campeonatoId || 0)">Deletar</button>
           </td>
         </tr>
       </tbody>
