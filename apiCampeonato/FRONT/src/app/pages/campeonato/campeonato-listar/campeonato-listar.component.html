@@ -1,0 +1,25 @@
+<div class="container">
+    <h2>Listar Campeonatos</h2>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Premiação</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let campeonato of campeonatos">
+          <td>{{ campeonato.id }}</td>
+          <td>{{ campeonato.nome }}</td>
+          <td>{{ campeonato.premiacao }}</td>
+          <td>
+            <button class="btn-deletar" (click)="deletar(campeonato.id)">Deletar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

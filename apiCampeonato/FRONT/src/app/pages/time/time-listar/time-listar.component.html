@@ -1,0 +1,21 @@
+<div class="time-listar-container">
+    <h2>Lista de Times</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let time of times">
+          <td>{{ time.id }}</td>
+          <td>{{ time.nome }}</td>
+          <td>
+            <button (click)="deletar(time.id)">Deletar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
