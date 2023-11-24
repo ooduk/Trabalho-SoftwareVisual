@@ -1,3 +1,4 @@
+import { Campeonato } from './../../../models/CampeonatoModel';
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -23,18 +24,18 @@ export class TimeCadastrarComponent {
 
   cadastrar(): void {
     let time: Time = {
-      nome: this.nome,
-      id: this.id
+      timeId: this.id,
+      nome: this.nome
     };
   
     this.client
       .post<Time>(
-        "https://localhost:7195/api/time/cadastrar",
+        "https://localhost:7021/api/time/cadastrar",
         time
       )
       .subscribe({
-     
         next: (time: any) => {
+     console.log("uwgfe");
           console.log('Resposta do servidor:', time);
           this.snackBar.open(
             "Time cadastrado com sucesso!!",

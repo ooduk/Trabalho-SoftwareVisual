@@ -1,4 +1,4 @@
 export interface Time{
-    id: number;
+    timeId: number;
     nome: string;
 }

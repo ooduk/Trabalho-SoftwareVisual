@@ -24,7 +24,7 @@ namespace apiBackend.Controllers
                 _ctx.SaveChanges();
 
                 string retorno = $"Campeonato Cadastrado:\n\nNome {campeonato.Nome}\nPremiação: R${string.Format("{0:N}", campeonato.Premiacao)}";
-                return Created("", retorno);
+                return Created("", campeonato);
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ namespace apiBackend.Controllers
                     {
                         retorno += $"Nome: {campeonato.Nome}\nPremiação: R${string.Format("{0:N}", campeonato.Premiacao)}\n\n";
                     }
-                    return Ok(retorno);
+                    return Ok(campeonatos);
                 }
                 return NotFound();
             }
@@ -67,7 +67,7 @@ namespace apiBackend.Controllers
                 if (CampeonatoCadastrado != null)
                 {
                     string retorno = $"Campeonato Consultado:\n\nNome: {CampeonatoCadastrado.Nome}\nPremiação: R${string.Format("{0:N}", CampeonatoCadastrado.Premiacao)}";
-                    return Ok(retorno);
+                    return Ok(CampeonatoCadastrado);
                 }
                 return NotFound();
             }
@@ -93,7 +93,7 @@ namespace apiBackend.Controllers
                     _ctx.SaveChanges();
 
                     string retorno = $"Campeonato Atualizado:\n\nNome: {campeonatoEncontrado.Nome}\nPremiação: R${string.Format("{0:N}", campeonatoEncontrado.Premiacao)}";
-                    return Ok(retorno);
+                    return Ok(campeonatoEncontrado);
                 }
                 return NotFound();
             }
@@ -167,8 +167,18 @@ namespace apiBackend.Controllers
                         var timeMenosGolsSofridos = times.OrderByDescending(t => t.Gols_contra).Last().TimeNome;
 
                         retorno += $"Time com Mais Vitórias: {timeVitorias}\nTime com Mais Derrotas: {timeDerrotas}\nTime com Mais Empates: {timeEmpates}\nTime com Mais Gols Marcados: {timeMaisGolsMarcados}\nTime com Menos Gols Marcados: {timeMenosGolsMarcados}\nTime com Mais Gols Sofridos: {timeMaisGolsSofridos}\nTime com Menos Gols Sofridos: {timeMenosGolsSofridos}";
+                        
+                        var analise = new {
+                            timeVitorias = timeVitorias,
+                            timeDerrotas= timeDerrotas,
+                            timeEmpates = timeEmpates,
+                            timeMaisGolsMarcados =timeMaisGolsMarcados,
+                            timeMenosGolsMarcados= timeMenosGolsMarcados,
+                            timeMaisGolsSofridos =timeMaisGolsSofridos,
+                            timeMenosGolsSofridos= timeMenosGolsSofridos,
+                        };
 
-                        return Ok(retorno);
+                        return Ok(analise);
                     }
                 }
                 return NotFound();
@@ -211,7 +221,7 @@ namespace apiBackend.Controllers
 
                         classificacao++;
                     }
-                    return Ok(retorno);
+                    return Ok(times);
                 }
                 return NotFound();
             }
@@ -258,7 +268,7 @@ namespace apiBackend.Controllers
 
                         classificacao++;
                     }
-                    return Ok(retorno);
+                    return Ok(times);
                 }
                 return NotFound();
             }

@@ -24,9 +24,7 @@ namespace apiBackend.Controllers
                 _ctx.Times.Add(time);
                 _ctx.SaveChanges();
 
-                string retorno = $"Time Cadastrado:\n\nNome: {time.Nome}";
-
-                return Created("", retorno);
+                return Created("", time);
             }
             catch (Exception e)
             {
@@ -44,14 +42,7 @@ namespace apiBackend.Controllers
 
                 if (times.Count() != 0)
                 {
-                    string retorno = $"Time(s) Listado(s):\n\n";
-
-                    foreach (var time in times)
-                    {
-                        retorno += $"Nome: {time.Nome}\n\n";
-                    }
-
-                    return Ok(retorno);
+                    return Ok(times);
                 }
                 return NotFound();
             }
@@ -70,9 +61,7 @@ namespace apiBackend.Controllers
 
                 if (TimeCadastrado != null)
                 {
-                    string retorno = $"Time Consultado:\n\nNome: {TimeCadastrado.Nome}";
-
-                    return Ok(retorno);
+                    return Ok(TimeCadastrado);
                 }
                 return NotFound();
             }
@@ -96,8 +85,7 @@ namespace apiBackend.Controllers
                     _ctx.Times.Update(TimeEncontrado);
                     _ctx.SaveChanges();
 
-                    string retorno = $"Time Atualizado:\n\nNome: {TimeEncontrado.Nome}";
-                    return Ok(retorno);
+                    return Ok(TimeEncontrado);
                 }
                 return NotFound();
             }
@@ -119,7 +107,9 @@ namespace apiBackend.Controllers
                     _ctx.Times.Remove(time);
                     _ctx.SaveChanges();
 
-                    return Ok("Time Deletado!");
+                    var times = _ctx.Times.ToList();
+
+                    return Ok(times);
                 }
                 return NotFound();
             }
@@ -163,7 +153,7 @@ namespace apiBackend.Controllers
                         {
                             retorno += $"Campeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}\n\n";
                         }
-                        return Ok(retorno);
+                        return Ok(confrontos);
                     }
                 }
                 return NotFound();

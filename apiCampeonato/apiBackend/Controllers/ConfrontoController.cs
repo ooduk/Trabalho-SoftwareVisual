@@ -58,7 +58,7 @@ namespace apiBackend.Controllers
                     _ctx.SaveChanges();
 
                     string retorno = $"Confronto Cadastrado:\n\nCampeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}";
-                    return Created("", retorno);
+                    return Created("", confrontoReturn);
                 }
                 
                 return BadRequest();
@@ -96,7 +96,7 @@ namespace apiBackend.Controllers
                     {
                         retorno += $"Campeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}\n\n";
                     }
-                    return Ok(retorno);
+                    return Ok(confrontos);
                 }
                 return NotFound();
             }
@@ -129,7 +129,7 @@ namespace apiBackend.Controllers
                 if (ConfrontoCadastrado != null)
                 {
                     string retorno = $"Confronto Consultado:\n\nCampeonato: {ConfrontoCadastrado.CampeonatoNome}\nResultado: {ConfrontoCadastrado.TimeCasaNome} {ConfrontoCadastrado.Gols_time_casa} x {ConfrontoCadastrado.Gols_time_fora} {ConfrontoCadastrado.TimeForaNome}";
-                    return Ok(retorno);
+                    return Ok(ConfrontoCadastrado);
                 }
                 return NotFound();
             }

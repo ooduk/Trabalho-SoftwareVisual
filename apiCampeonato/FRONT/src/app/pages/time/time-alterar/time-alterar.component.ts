@@ -26,17 +26,17 @@ export class TimeAlterarComponent {
         let { id } = parametros;
         this.client
           .get<Time>(
-            `https://localhost:7195/api/time/consultar/${id}`
+            `https://localhost:7021/api/time/consultar/${id}`
           )
           .subscribe({
             next: (time) => {
               this.client
                 .get<Time[]>(
-                  "https://localhost:7195/api/time/listar"
+                  "https://localhost:7021/api/time/listar"
                 )
                 .subscribe({
                   next: (times) => {
-                    this.id = time.id;
+                    this.id = time.timeId;
                     this.nome = time.nome;
                   },
                   error: (erro) => {
@@ -56,14 +56,14 @@ export class TimeAlterarComponent {
   alterar(): void {
     let time: Time = {
       nome: this.nome,
-      id: 0
+      timeId: 0
     };
 
     console.log(time);
 
     this.client
       .put<Time>(
-        `https://localhost:7195/api/time/atualizar/${this.id}`,
+        `https://localhost:7021/api/time/atualizar/${this.id}`,
         time
       )
       .subscribe({

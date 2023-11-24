@@ -10,10 +10,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let time of times">
-          <td>{{ time.id }}</td>
+          <td>{{ time.timeId }}</td>
           <td>{{ time.nome }}</td>
           <td>
-            <button (click)="deletar(time.id)">Deletar</button>
+            <button (click)="deletar(time.timeId)">Deletar</button>
           </td>
         </tr>
       </tbody>

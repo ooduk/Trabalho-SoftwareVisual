@@ -46,7 +46,7 @@ namespace apiBackend.Controllers
                 _ctx.SaveChanges();
 
                 string retorno = $"Tabela Cadastrada:\n\nCampeonato: {tabelaReturn.CampeonatoNome}\nTime: {tabelaReturn.TimeNome}\nPontos: {tabela.Pontos}\nGols Marcados: {tabela.Gols_marcados}\nGols Contra: {tabela.Gols_contra}\nVitórias: {tabela.Vitorias}\nDerrotas: {tabela.Derrotas}\nEmpates: {tabela.Empates}";
-                return Created("", retorno);
+                return Created("", tabelaReturn);
             }
             catch (Exception e)
             {
@@ -85,7 +85,7 @@ namespace apiBackend.Controllers
                         retorno += $"Campeonato: {tabela.CampeonatoNome}\nTime: {tabela.TimeNome}\nPontos: {tabela.Pontos}\nGols Marcados: {tabela.Gols_marcados}\nGols Contra: {tabela.Gols_contra}\nVitórias: {tabela.Vitorias}\nDerrotas: {tabela.Derrotas}\nEmpates: {tabela.Empates}\n\n";
                     }
 
-                    return Ok(retorno);
+                    return Ok(tabelas);
                 }
                 return NotFound();
             }
@@ -120,7 +120,7 @@ namespace apiBackend.Controllers
                 {
                     string retorno = $"Tabela Consultada:\n\nCampeonato: {tabela.CampeonatoNome}\nTime: {tabela.TimeNome}\nPontos: {tabela.Pontos}\nGols Marcados: {tabela.Gols_marcados}\nGols Contra: {tabela.Gols_contra}\nVitórias: {tabela.Vitorias}\nDerrotas: {tabela.Derrotas}\nEmpates: {tabela.Empates}\n\n";
 
-                    return Ok(retorno);
+                    return Ok(tabela);
                 }
                 return NotFound();
             }

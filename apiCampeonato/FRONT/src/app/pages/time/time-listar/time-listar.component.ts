@@ -24,7 +24,7 @@ export class TimeListarComponent {
 
   ngOnInit(): void {
     this.client
-      .get<Time[]>("https://localhost:7195/api/time/listar")
+      .get<Time[]>("https://localhost:7021/api/time/listar")
       .subscribe({
       
         next: (times: Time[]) => {
@@ -41,15 +41,16 @@ export class TimeListarComponent {
   deletar(id: number) {
     this.client
       .delete<Time[]>(
-        `https://localhost:7195/api/time/deletar/${id}`
+        `https://localhost:7021/api/time/deletar/${id}`
       )
       .subscribe({
      
         next: (times: Time[]) => {
+          console.log(id)
           this.times = times;
           this.snackBar.open(
-            "Time deletado com sucesso!!",
-            "E-commerce",
+            "Time deletado com sucesso!",
+            "Times",
             {
               duration: 1500,
               horizontalPosition: "right",
