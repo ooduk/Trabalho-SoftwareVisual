@@ -55,4 +55,4 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7021/api/time/historico/1
+GET https://localhost:7021/api/time/historico/6

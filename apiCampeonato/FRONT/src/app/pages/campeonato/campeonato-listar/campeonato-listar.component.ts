@@ -10,7 +10,7 @@ import { Campeonato } from './../../../models/CampeonatoModel';
 })
 export class CampeonatoListarComponent {
   colunasTabela: string[] = [
-    "id",
+    "campeonatoId",
     "nome",
     "premiacao"
   ];
@@ -25,7 +25,7 @@ export class CampeonatoListarComponent {
 
   ngOnInit(): void {
     this.client
-      .get<Campeonato[]>("https://localhost:7195/api/campeonato/listar")
+      .get<Campeonato[]>("https://localhost:7021/api/campeonato/listar")
       .subscribe({
         next: (campeonatos: Campeonato[]) => {
           console.table(campeonatos);
@@ -40,14 +40,14 @@ export class CampeonatoListarComponent {
   deletar(campeonatoId: number) {
     this.client
       .delete<Campeonato[]>(
-        `https://localhost:7195/api/campeonato/deletar/${campeonatoId}`
+        `https://localhost:7021/api/campeonato/deletar/${campeonatoId}`
       )
       .subscribe({
         next: (campeonatos: Campeonato[]) => {
           this.campeonatos = campeonatos;
           this.snackBar.open(
             "Campeonato deletado com sucesso!!",
-            "E-commerce",
+            "CampManager",
             {
               duration: 1500,
               horizontalPosition: "right",

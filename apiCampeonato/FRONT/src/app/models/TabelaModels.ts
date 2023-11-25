@@ -1,5 +1,4 @@
 export interface Tabela{
-     nome: any;
      TabelaId?: number;
      CampeonatoId?: number;
      TimeId?: number;

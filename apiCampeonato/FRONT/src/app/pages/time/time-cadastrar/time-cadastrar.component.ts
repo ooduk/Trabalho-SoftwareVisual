@@ -39,7 +39,7 @@ export class TimeCadastrarComponent {
           console.log('Resposta do servidor:', time);
           this.snackBar.open(
             "Time cadastrado com sucesso!!",
-            "E-commerce",
+            "CampManager",
             {
               duration: 1500,
               horizontalPosition: "right",

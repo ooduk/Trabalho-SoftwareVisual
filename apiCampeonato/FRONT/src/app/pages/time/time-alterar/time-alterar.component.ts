@@ -10,7 +10,7 @@ import { Time } from "src/app/models/TimeModel";
   styleUrls: ["./time-alterar.component.css"],
 })
 export class TimeAlterarComponent {
-  id: number = 0;
+  timeId?: number = 0;
   nome: string = "";
 
   constructor(
@@ -36,7 +36,7 @@ export class TimeAlterarComponent {
                 )
                 .subscribe({
                   next: (times) => {
-                    this.id = time.timeId;
+                    this.timeId = time.timeId;
                     this.nome = time.nome;
                   },
                   error: (erro) => {
@@ -56,14 +56,13 @@ export class TimeAlterarComponent {
   alterar(): void {
     let time: Time = {
       nome: this.nome,
-      timeId: 0
     };
 
     console.log(time);
 
     this.client
       .put<Time>(
-        `https://localhost:7021/api/time/atualizar/${this.id}`,
+        `https://localhost:7021/api/time/atualizar/${this.timeId}`,
         time
       )
       .subscribe({
@@ -71,7 +70,7 @@ export class TimeAlterarComponent {
         next: (time) => {
           this.snackBar.open(
             "Time alterado com sucesso!!",
-            "E-commerce",
+            "CampManager",
             {
               duration: 1500,
               horizontalPosition: "right",

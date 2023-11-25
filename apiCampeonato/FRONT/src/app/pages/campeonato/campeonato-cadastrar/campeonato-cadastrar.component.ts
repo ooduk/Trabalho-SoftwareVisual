@@ -30,7 +30,7 @@ export class CampeonatoCadastrarComponent {
 
     this.client
       .post<Campeonato>(
-        "https://localhost:7195/api/campeonato/cadastrar",
+        "https://localhost:7021/api/campeonato/cadastrar",
         campeonato
       )
       .subscribe({
@@ -38,7 +38,7 @@ export class CampeonatoCadastrarComponent {
           console.log('Resposta do servidor:', campeonato);
           this.snackBar.open(
             "Campeonato cadastrado com sucesso!!",
-            "E-commerce",
+            "CampManager",
             {
               duration: 1500,
               horizontalPosition: "right",

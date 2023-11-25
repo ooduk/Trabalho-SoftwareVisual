@@ -10,8 +10,11 @@ import { Time } from "src/app/models/TimeModel";
 })
 export class TimeListarComponent {
   colunasTabela: string[] = [
-    "id",
-    "nome"
+    "timeId",
+    "nome",
+    "deletar",
+    "alterar",
+    "historico"
   ];
   times: Time[] = [];
 
@@ -50,7 +53,7 @@ export class TimeListarComponent {
           this.times = times;
           this.snackBar.open(
             "Time deletado com sucesso!",
-            "Times",
+            "CampManager",
             {
               duration: 1500,
               horizontalPosition: "right",

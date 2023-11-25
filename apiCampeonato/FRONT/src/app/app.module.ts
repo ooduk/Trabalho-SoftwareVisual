@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatTableModule } from "@angular/material/table";
@@ -23,6 +23,10 @@ import { TimeListarComponent} from "./pages/time/time-listar/time-listar.compone
 import { CampeonatoListarComponent} from "./pages/campeonato/campeonato-listar/campeonato-listar.component";
 import { CampeonatoCadastrarComponent} from "./pages/campeonato/campeonato-cadastrar/campeonato-cadastrar.component";
 import { CampeonatoAlterarComponent} from "./pages/campeonato/campeonato-alterar/campeonato-alterar.component";
+import { ConfrontoListarComponent } from "./pages/confronto/confronto-listar/confronto-listar.component";
+import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
+// import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
+
 // import { TabelaCadastrarComponent} from "./pages/tabela/tabela-cadastrar/tabela-cadastrar.component";
 // import { ConfrontoAlterarComponent} from "./pages/confronto/confronto-alterar/confronto-alterar.component";
 // import { ConfrontoCadastrarComponent} from "./pages/confronto/confronto-cadastrar/confronto-cadastrar.component";
@@ -38,6 +42,8 @@ import { CampeonatoAlterarComponent} from "./pages/campeonato/campeonato-alterar
     CampeonatoAlterarComponent,
     CampeonatoCadastrarComponent,
     CampeonatoListarComponent,
+    ConfrontoListarComponent,
+    TimeHistoricoComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +52,8 @@ import { CampeonatoAlterarComponent} from "./pages/campeonato/campeonato-alterar
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule,
     MatIconModule,
+    MatButtonModule,
     MatSidenavModule,
     MatListModule,
     MatTableModule,

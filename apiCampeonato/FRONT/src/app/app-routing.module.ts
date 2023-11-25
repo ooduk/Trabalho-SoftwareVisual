@@ -5,6 +5,8 @@ import { TimeCadastrarComponent } from "./pages/time/time-cadastrar/time-cadastr
 import { TimeAlterarComponent } from "./pages/time/time-alterar/time-alterar.component";
 import { CampeonatoCadastrarComponent } from "./pages/campeonato/campeonato-cadastrar/campeonato-cadastrar.component";
 import { CampeonatoListarComponent } from "./pages/campeonato/campeonato-listar/campeonato-listar.component";
+import { ConfrontoListarComponent } from "./pages/confronto/confronto-listar/confronto-listar.component";
+import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
 
 const routes: Routes = [
   {
@@ -30,6 +32,14 @@ const routes: Routes = [
   {
     path: "pages/campeonato/listar",
     component: CampeonatoListarComponent,
+  },
+  {
+    path: "pages/confronto/listar",
+    component: ConfrontoListarComponent,
+  },
+  {
+    path: "pages/time/historico/:id",
+    component: TimeHistoricoComponent,
   },
 ];
 
