@@ -1,22 +1,24 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Time } from "src/app/models/TimeModel";
+import { Campeonato } from '../../../models/CampeonatoModel';
 
 @Component({
-  selector: "app-time-listar",
-  templateUrl: "./time-listar.component.html",
-  styleUrls: ["./time-listar.component.css"],
+  selector: "app-campeonato-listar",
+  templateUrl: "./campeonato-listar.component.html",
+  styleUrls: ["./campeonato-listar.component.css"],
 })
-export class TimeListarComponent {
+export class CampeonatoListarComponent {
   colunasTabela: string[] = [
-    "timeId",
+    "campeonatoId",
     "nome",
+    "premiacao",
     "deletar",
     "alterar",
-    "historico"
+    "classificacao",
+    "classificacaoDetalhada"
   ];
-  times: Time[] = [];
+  campeonatos: Campeonato[] = [];
 
   constructor(
     private client: HttpClient,
@@ -27,31 +29,28 @@ export class TimeListarComponent {
 
   ngOnInit(): void {
     this.client
-      .get<Time[]>("https://localhost:7021/api/time/listar")
+      .get<Campeonato[]>("https://localhost:7021/api/campeonato/listar")
       .subscribe({
-      
-        next: (times: Time[]) => {
-          console.table(times);
-          this.times = times;
+        next: (campeonatos: Campeonato[]) => {
+          console.table(campeonatos);
+          this.campeonatos = campeonatos;
         },
-    
         error: (erro: any) => {
           console.log(erro);
         },
       });
   }
 
-  deletar(id: number) {
+  deletar(campeonatoId: number) {
     this.client
-      .delete<Time[]>(
-        `https://localhost:7021/api/time/deletar/${id}`
+      .delete<Campeonato[]>(
+        `https://localhost:7021/api/campeonato/deletar/${campeonatoId}`
       )
       .subscribe({
-        next: (times: Time[]) => {
-          console.log(id)
-          this.times = times;
+        next: (campeonatos: Campeonato[]) => {
+          this.campeonatos = campeonatos;
           this.snackBar.open(
-            "Time deletado com sucesso!",
+            "Campeonato deletado com sucesso!!",
             "CampManager",
             {
               duration: 1500,
@@ -60,7 +59,6 @@ export class TimeListarComponent {
             }
           );
         },
-     
         error: (erro: any) => {
           console.log(erro);
         },

@@ -27,13 +27,13 @@ export class CampeonatoAlterarComponent {
         let { id } = parametros;
         this.client
           .get<Campeonato>(
-            `https://localhost:7195/api/campeonato/consultar/${id}`
+            `https://localhost:7021/api/campeonato/consultar/${id}`
           )
           .subscribe({
             next: (campeonato) => {
               this.client
                 .get<Campeonato[]>(
-                  "https://localhost:7195/api/campeonato/listar"
+                  "https://localhost:7021/api/campeonato/listar"
                 )
                 .subscribe({
                   next: (campeonatos) => {
@@ -66,7 +66,7 @@ export class CampeonatoAlterarComponent {
 
     this.client
       .put<Campeonato>(
-        `https://localhost:7195/api/campeonato/atualizar/${this.campeonatoId}`,
+        `https://localhost:7021/api/campeonato/atualizar/${this.campeonatoId}`,
         campeonato
       )
       .subscribe({
@@ -74,7 +74,7 @@ export class CampeonatoAlterarComponent {
         next: (campeonato) => {
           this.snackBar.open(
             "Campeonato alterado com sucesso!!",
-            "E-commerce",
+            "CampManager",
             {
               duration: 1500,
               horizontalPosition: "right",

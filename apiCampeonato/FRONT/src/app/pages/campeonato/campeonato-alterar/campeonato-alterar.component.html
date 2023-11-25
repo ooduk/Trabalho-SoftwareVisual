@@ -1,16 +1,19 @@
-<div class="container">
-  <h2>Alterar Campeonato</h2>
-  <form class="form" (submit)="alterar()">
-    <div class="form-group">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" #nomeInput name="nome" required />
-    </div>
-
-    <div class="form-group">
-      <label for="premiacao">Premiação:</label>
-      <input type="text" id="premiacao" #premiacaoInput name="premiacao" required />
-    </div>
-
-    <button type="submit" class="btn-alterar">Alterar</button>
-  </form>
-</div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Alterar Campeonato</mat-card-title>
+    <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="input" id="nome">
+      <mat-label>Nome</mat-label>
+      <input placeholder="Ex. Barcelona" matInput type="text" [(ngModel)]="nome" />
+    </mat-form-field>
+    <mat-form-field class="input" id="premiacao">
+      <mat-label>Premiação</mat-label>
+      <input placeholder="Ex. R$ 100.000" matInput type="text" [(ngModel)]="premiacao" />
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button color="warn" mat-stroked-button (click)="alterar()">Alterar</button>
+  </mat-card-actions>
+</mat-card>

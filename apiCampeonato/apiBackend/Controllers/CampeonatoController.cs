@@ -115,7 +115,9 @@ namespace apiBackend.Controllers
                     _ctx.Campeonatos.Remove(Campeonato);
                     _ctx.SaveChanges();
 
-                    return Ok("Campeonato Deletado!");
+                    List<Campeonato> campeonatos = _ctx.Campeonatos.ToList();
+
+                    return Ok(campeonatos);
                 }
 
                 return NotFound();
