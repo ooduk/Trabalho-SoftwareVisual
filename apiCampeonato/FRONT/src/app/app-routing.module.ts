@@ -11,6 +11,7 @@ import { CampeonatoAlterarComponent } from "./pages/campeonato/campeonato-altera
 import { CampeonatoClassificacaoComponent } from "./pages/campeonato/campeonato-classificacao/campeonato-classificacao.component";
 import { CampeonatoClassificacaoDetalhadaComponent } from "./pages/campeonato/campeonato-classificacao-detalhada/campeonato-classificacao-detalhada.component";
 import { CampeonatoAnalisarComponent } from "./pages/campeonato/campeonato-analisar/campeonato-analisar.component";
+import { ConfrontoCadastrarComponent } from "./pages/confronto/confronto-cadastrar/confronto-cadastrar.component";
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: "pages/confronto/listar",
     component: ConfrontoListarComponent,
+  },
+  {
+    path: "pages/confronto/cadastrar",
+    component: ConfrontoCadastrarComponent,
   },
   {
     path: "pages/time/historico/:id",

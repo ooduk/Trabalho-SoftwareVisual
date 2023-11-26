@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace apiBackend.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20231125145020_CreateDatabase")]
+    [Migration("20231126175033_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

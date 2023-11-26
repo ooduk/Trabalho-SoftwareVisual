@@ -54,21 +54,16 @@ namespace apiBackend.Controllers
 
                 if (Resultado(confrontoRequest.TimeCasaId, confrontoRequest.TimeForaId, confrontoRequest.CampeonatoId, confrontoRequest.Gols_time_casa, confrontoRequest.Gols_time_fora))
                 {
-                    Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     _ctx.Confrontos.Add(confronto);
                     _ctx.SaveChanges();
 
-                    string retorno = $"Confronto Cadastrado:\n\nCampeonato: {confrontoReturn.CampeonatoNome}\nResultado: {confrontoReturn.TimeCasaNome} {confrontoReturn.Gols_time_casa} x {confrontoReturn.Gols_time_fora} {confrontoReturn.TimeForaNome}";
                     return Created("", confrontoReturn);
                 }
 
-                return Created("", confrontoReturn);
-                
-                // return BadRequest();
+                return BadRequest();
             }
             catch (Exception e)
             {
-                Console.WriteLine($">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {e}");
                 return BadRequest(e.Message);
             }
         }
@@ -146,7 +141,7 @@ namespace apiBackend.Controllers
 
         public bool Resultado(int idTimeCasa, int idTimeFora, int idCampeonato, int golsCasa, int golsFora)
         {
-           try
+            try
             {
                 if (golsCasa > golsFora)
                 {
@@ -160,26 +155,43 @@ namespace apiBackend.Controllers
                     {
                         return false;
                     }
-                       
-                    Tabela tabelaVenceu = new Tabela
+
+                    Tabela? timeVenceuCadastro = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato && t.TimeId == idTimeCasa)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .FirstOrDefault();
+
+                    Tabela? timePerdeuCadastro = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato && t.TimeId == idTimeFora)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .FirstOrDefault();
+
+                    if (timeVenceuCadastro == null)
                     {
-                        Campeonato = campeonato,
-                        Time = timeVenceu
-                    };
+                        timeVenceuCadastro = new Tabela
+                        {
+                            Campeonato = campeonato,
+                            Time = timeVenceu
+                        };
+                        _ctx.Tabelas.Add(timeVenceuCadastro);
+                        _ctx.SaveChanges();
+                    }
 
-                    Tabela tabelaPerdeu = new Tabela
+                    if (timePerdeuCadastro == null)
                     {
-                        Campeonato = campeonato,
-                        Time = timePerdeu
-                    };
+                        timePerdeuCadastro = new Tabela
+                        {
+                            Campeonato = campeonato,
+                            Time = timePerdeu
+                        };
+                        _ctx.Tabelas.Add(timePerdeuCadastro);
+                        _ctx.SaveChanges();
+                    }
 
-                    _ctx.Tabelas.Add(tabelaVenceu);
-                    _ctx.Tabelas.Add(tabelaPerdeu);
-
-                    _ctx.SaveChanges();                    
-
-                    Vencer(tabelaVenceu, golsFora, golsCasa);
-                    Perder(tabelaPerdeu, golsCasa, golsFora);
+                    Vencer(timeVenceuCadastro, golsFora, golsCasa);
+                    Perder(timePerdeuCadastro, golsCasa, golsFora);
 
                     return true;
                 }
@@ -196,26 +208,43 @@ namespace apiBackend.Controllers
                     {
                         return false;
                     }
-                       
-                    Tabela tabelaVenceu = new Tabela
+
+                    Tabela? timeVenceuCadastro = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato && t.TimeId == idTimeFora)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .FirstOrDefault();
+
+                    Tabela? timePerdeuCadastro = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato && t.TimeId == idTimeCasa)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .FirstOrDefault();
+
+                    if (timeVenceuCadastro == null)
                     {
-                        Campeonato = campeonato,
-                        Time = timeVenceu
-                    };
+                        timeVenceuCadastro = new Tabela
+                        {
+                            Campeonato = campeonato,
+                            Time = timeVenceu
+                        };
+                        _ctx.Tabelas.Add(timeVenceuCadastro);
+                        _ctx.SaveChanges();
+                    }
 
-                    Tabela tabelaPerdeu = new Tabela
+                     if (timePerdeuCadastro == null)
                     {
-                        Campeonato = campeonato,
-                        Time = timePerdeu
-                    };
+                        timePerdeuCadastro = new Tabela
+                        {
+                            Campeonato = campeonato,
+                            Time = timePerdeu
+                        };
+                        _ctx.Tabelas.Add(timePerdeuCadastro);
+                        _ctx.SaveChanges();
+                    }
 
-                    _ctx.Tabelas.Add(tabelaVenceu);
-                    _ctx.Tabelas.Add(tabelaPerdeu);
-
-                    _ctx.SaveChanges();                    
-
-                    Vencer(tabelaVenceu, golsFora, golsCasa);
-                    Perder(tabelaPerdeu, golsCasa, golsFora);
+                    Vencer(timeVenceuCadastro, golsFora, golsCasa);
+                    Perder(timePerdeuCadastro, golsCasa, golsFora);
 
                     return true;
                 }
@@ -232,27 +261,45 @@ namespace apiBackend.Controllers
                         return false;
                     }
 
-                    Tabela tabelaEmpate1 = new Tabela
+                    Tabela? timeEmpateCasa = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato && t.TimeId == idTimeCasa)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .FirstOrDefault();
+
+                    Tabela? timeEmpateFora = _ctx.Tabelas
+                    .Where(t => t.CampeonatoId == idCampeonato && t.TimeId == idTimeFora)
+                    .Include(t => t.Time)
+                    .Include(t => t.Campeonato)
+                    .FirstOrDefault();
+
+                    if (timeEmpateCasa == null)
                     {
-                        Campeonato = campeonato,
-                        Time = timeEmpate1
-                    };
+                        timeEmpateCasa = new Tabela
+                        {
+                            Campeonato = campeonato,
+                            Time = timeEmpate1
+                        };
+                        _ctx.Tabelas.Add(timeEmpateCasa);
+                        _ctx.SaveChanges();
+                    }
 
-                    Tabela tabelaEmpate2 = new Tabela
+                     if (timeEmpateFora == null)
                     {
-                        Campeonato = campeonato,
-                        Time = timeEmpate2
-                    };
+                        timeEmpateFora = new Tabela
+                        {
+                            Campeonato = campeonato,
+                            Time = timeEmpate2
+                        };
+                        _ctx.Tabelas.Add(timeEmpateFora);
+                        _ctx.SaveChanges();
+                    }
 
-                    _ctx.Tabelas.Add(tabelaEmpate1);
-                    _ctx.Tabelas.Add(tabelaEmpate2);
-
-                    _ctx.SaveChanges();                    
-
-                    Empatar(tabelaEmpate1, golsFora, golsCasa);
-                    Empatar(tabelaEmpate2, golsCasa, golsFora);
+                    Empatar(timeEmpateFora, golsFora, golsCasa);
+                    Empatar(timeEmpateCasa, golsCasa, golsFora);
 
                     return true;
+
                 }
             }
             catch (Exception)
@@ -269,7 +316,7 @@ namespace apiBackend.Controllers
             time.Gols_contra += golsSofridos;
 
             _ctx.Tabelas.Update(time);
-            _ctx.SaveChanges(); 
+            _ctx.SaveChanges();
         }
 
         public void Perder(Tabela time, int golsMarcados, int golsSofridos)
