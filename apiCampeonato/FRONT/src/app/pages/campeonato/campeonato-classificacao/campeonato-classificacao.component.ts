@@ -12,7 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class CampeonatoClassificacaoComponent {
   colunasTabela: string[] = [
-    "tabelaId",
+    "classificacao",
     "timeNome",
     "pontos"
   ];
@@ -38,6 +38,9 @@ export class CampeonatoClassificacaoComponent {
                 next: (tabelas) => {
                   console.table(tabelas)
                   this.tabelas = tabelas;
+                  this.tabelas.forEach((time, index) => {
+                    time.classificacao = index + 1;
+                  });
                 },
                 error: (erro) => {
                   console.log(erro);

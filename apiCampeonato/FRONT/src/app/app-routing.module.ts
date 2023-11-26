@@ -32,6 +32,10 @@ const routes: Routes = [
     component: TimeAlterarComponent,
   },
   {
+    path: "pages/time/historico/:id",
+    component: TimeHistoricoComponent,
+  },
+  {
     path: "pages/campeonato/cadastrar",
     component: CampeonatoCadastrarComponent,
   },
@@ -42,18 +46,6 @@ const routes: Routes = [
   {
     path: "pages/campeonato/alterar/:id",
     component: CampeonatoAlterarComponent,
-  },
-  {
-    path: "pages/confronto/listar",
-    component: ConfrontoListarComponent,
-  },
-  {
-    path: "pages/confronto/cadastrar",
-    component: ConfrontoCadastrarComponent,
-  },
-  {
-    path: "pages/time/historico/:id",
-    component: TimeHistoricoComponent,
   },
   {
     path: "pages/campeonato/classificacao/:id",
@@ -71,6 +63,14 @@ const routes: Routes = [
     path: "pages/campeonato/finalizar/:id",
     component: CampeonatoFinalizarComponent,
   },
+  {
+    path: "pages/confronto/listar",
+    component: ConfrontoListarComponent,
+  },
+  {
+    path: "pages/confronto/cadastrar",
+    component: ConfrontoCadastrarComponent,
+  }
 ];
 
 @NgModule({

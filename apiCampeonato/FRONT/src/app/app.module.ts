@@ -12,12 +12,11 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import {TimeAlterarComponent } from './pages/time/time-alterar/time-alterar.component';
+import { TimeAlterarComponent } from './pages/time/time-alterar/time-alterar.component';
 import { TimeCadastrarComponent } from "./pages/time/time-cadastrar/time-cadastrar.component";
 import { TimeListarComponent} from "./pages/time/time-listar/time-listar.component";
 import { CampeonatoListarComponent} from "./pages/campeonato/campeonato-listar/campeonato-listar.component";
@@ -30,14 +29,7 @@ import { CampeonatoClassificacaoDetalhadaComponent } from "./pages/campeonato/ca
 import { CampeonatoAnalisarComponent } from "./pages/campeonato/campeonato-analisar/campeonato-analisar.component";
 import { ConfrontoCadastrarComponent } from "./pages/confronto/confronto-cadastrar/confronto-cadastrar.component";
 import { CampeonatoFinalizarComponent } from "./pages/campeonato/campeonato-finalizar/campeonato-finalizar.component";
-// import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
 
-// import { TabelaCadastrarComponent} from "./pages/tabela/tabela-cadastrar/tabela-cadastrar.component";
-// import { ConfrontoAlterarComponent} from "./pages/confronto/confronto-alterar/confronto-alterar.component";
-// import { ConfrontoCadastrarComponent} from "./pages/confronto/confronto-cadastrar/confronto-cadastrar.component";
-// import { ConfrontoListarComponent} from "./pages/confronto/confronto-listar/confronto-listar.component";
-// import { TabelaListarComponent} from "./pages/tabela/tabela-listar/tabela-listar.component";
-// import { TabelaAlterarComponent} from "./pages/tabela/tabela-alterar/tabela-alterar.component";
 @NgModule({
   declarations: [
     AppComponent,

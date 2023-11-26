@@ -9,7 +9,6 @@ import { Component } from "@angular/core";
 })
 export class ConfrontoListarComponent {
   colunasTabela: string[] = [
-    "confrontoId",
     "campeonatoNome",
     "resultado"
   ];

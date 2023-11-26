@@ -1,39 +1,16 @@
-
-body, h1, h2, h3, p, ul, ol, li {
-    margin: 0;
-    padding: 0;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-}
-
-.menu {
-    background-color: transparent;
-    color: white;
-    border: none;
-}
-
-.container {
+.container{
     height: calc(100% - 64px);
 }
 
-.item {
+.item{
     display: flex;
     align-items: center;
 }
 
-.icon {
+.icon{
     margin-right: 8px;
 }
 
-.content {
+.content{
     padding: 8px;
 }
-
-
-

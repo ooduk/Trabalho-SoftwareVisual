@@ -9,46 +9,44 @@
   <mat-sidenav #sidenav [opened]="true" mode="side">
     <mat-nav-list>
       <a mat-list-item routerLink="/pages/time/listar">
-        <div class="time">
+        <div class="item">
           <mat-icon class="icon"> list </mat-icon>
           <span> Listar Times </span>
         </div>
       </a>
       <a mat-list-item routerLink="/pages/time/cadastrar">
-        <div class="time">
+        <div class="item">
           <mat-icon class="icon"> add </mat-icon>
           <span> Cadastrar Times </span>
         </div>
       </a>
       <a mat-list-item routerLink="/pages/campeonato/listar">
-        <div class="time">
+        <div class="item">
           <mat-icon class="icon"> list </mat-icon>
           <span> Listar Campeonatos </span>
         </div>
       </a>
       <a mat-list-item routerLink="/pages/campeonato/cadastrar">
-        <div class="time">
+        <div class="item">
           <mat-icon class="icon"> add </mat-icon>
-          <span> Cadastrar Campeonato </span>
+          <span> Cadastrar Campeonatos </span>
         </div>
       </a>
       <a mat-list-item routerLink="/pages/confronto/listar">
-        <div class="time">
+        <div class="item">
           <mat-icon class="icon"> list </mat-icon>
           <span> Listar Confrontos </span>
         </div>
       </a>
       <a mat-list-item routerLink="/pages/confronto/cadastrar">
-        <div class="time">
+        <div class="item">
           <mat-icon class="icon"> add </mat-icon>
-          <span> Cadastrar Confronto </span>
+          <span> Cadastrar Confrontos </span>
         </div>
       </a>
     </mat-nav-list>
-    <!-- <a routerLink="/pages/produto/cadastrar"> Cadastrar </a> -->
   </mat-sidenav>
   <mat-sidenav-content class="content">
-    <!-- Conteúdo -->
     <router-outlet> </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

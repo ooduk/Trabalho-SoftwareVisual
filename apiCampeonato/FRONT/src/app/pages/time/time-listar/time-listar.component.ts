@@ -10,7 +10,6 @@ import { Time } from "src/app/models/TimeModel";
 })
 export class TimeListarComponent {
   colunasTabela: string[] = [
-    "timeId",
     "nome",
     "deletar",
     "alterar",

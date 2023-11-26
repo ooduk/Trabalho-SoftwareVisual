@@ -12,7 +12,6 @@ import { Time } from "src/app/models/TimeModel";
 })
 export class TimeHistoricoComponent {
   colunasTabela: string[] = [
-    "confrontoId",
     "campeonatoNome",
     "resultado"
   ];

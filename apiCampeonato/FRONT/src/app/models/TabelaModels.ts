@@ -1,5 +1,6 @@
 export interface Tabela{
      TabelaId?: number;
+     classificacao?: number;
      timeNome?: number;
      campeonatoNome: string;
      pontos?: number;
