@@ -65,6 +65,18 @@
           </a>
         </td>
       </ng-container>
+      <ng-container matColumnDef="finalizar">
+        <th mat-header-cell *matHeaderCellDef>Finalizar</th>
+        <td mat-cell *matCellDef="let campeonato">
+          <a
+            color="blue"
+            mat-stroked-button
+            routerLink="/pages/campeonato/finalizar/{{ campeonato.campeonatoId }}"
+          >
+            Finalizar
+          </a>
+        </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
       <tr mat-row *matRowDef="let row; columns: colunasTabela"></tr>
     </table>

@@ -5,6 +5,7 @@ namespace apiBackend.Controllers
     using Microsoft.AspNetCore.Mvc;
     using ApiBackend.DTOs;
     using Microsoft.EntityFrameworkCore;
+    using System.Text.Json;
 
     [ApiController]
     [Route("api/campeonato")]
@@ -156,10 +157,6 @@ namespace apiBackend.Controllers
 
                     if (times.Count() != 0)
                     {
-                        var campeonatoNome = times.First().CampeonatoNome;
-
-                        string retorno = $"Análise: {campeonatoNome}\n\n";
-
                         var timeVitorias = times.OrderByDescending(t => t.Vitorias).First().TimeNome;
                         var timeDerrotas = times.OrderByDescending(t => t.Derrotas).First().TimeNome;
                         var timeEmpates = times.OrderByDescending(t => t.Empates).First().TimeNome;
@@ -168,18 +165,20 @@ namespace apiBackend.Controllers
                         var timeMaisGolsSofridos = times.OrderByDescending(t => t.Gols_contra).First().TimeNome;
                         var timeMenosGolsSofridos = times.OrderByDescending(t => t.Gols_contra).Last().TimeNome;
 
-                        retorno += $"Time com Mais Vitórias: {timeVitorias}\nTime com Mais Derrotas: {timeDerrotas}\nTime com Mais Empates: {timeEmpates}\nTime com Mais Gols Marcados: {timeMaisGolsMarcados}\nTime com Menos Gols Marcados: {timeMenosGolsMarcados}\nTime com Mais Gols Sofridos: {timeMaisGolsSofridos}\nTime com Menos Gols Sofridos: {timeMenosGolsSofridos}";
-
-                        var analise = new
+                        List<object> analise = new List<object>
                         {
-                            timeVitorias = timeVitorias,
-                            timeDerrotas = timeDerrotas,
-                            timeEmpates = timeEmpates,
-                            timeMaisGolsMarcados = timeMaisGolsMarcados,
-                            timeMenosGolsMarcados = timeMenosGolsMarcados,
-                            timeMaisGolsSofridos = timeMaisGolsSofridos,
-                            timeMenosGolsSofridos = timeMenosGolsSofridos,
+                            new {
+                                TimeVitorias = timeVitorias,
+                                TimeDerrotas = timeDerrotas,
+                                TimeEmpates = timeEmpates,
+                                TimeMaisGolsMarcados = timeMaisGolsMarcados,
+                                TimeMenosGolsMarcados = timeMenosGolsMarcados,
+                                TimeMaisGolsSofridos = timeMaisGolsSofridos,
+                                TimeMenosGolsSofridos = timeMenosGolsSofridos
+                            },
                         };
+
+                        string analiseJson = JsonSerializer.Serialize(analise);
 
                         return Ok(analise);
                     }
@@ -269,7 +268,7 @@ namespace apiBackend.Controllers
             }
         }
 
-        [HttpGet, Route("finalizar/{id}")]
+        [HttpDelete, Route("finalizar/{id}")]
         public IActionResult Finalizar([FromRoute] int id)
         {
             try
@@ -294,20 +293,21 @@ namespace apiBackend.Controllers
                     return NotFound();
                 }
 
-                var campeonatoNome = times.First().CampeonatoNome;
-                string retorno = $"Classificação Final: {campeonatoNome}\n\n";
+                var ganhador = times.First().TimeNome;
 
-                var ganhador = times.First();
-                retorno += $"Primeiro colocado: {ganhador.TimeNome} com {ganhador.Pontos} ponto(s)!\n\n";
+                var ultimoColocado = times.Last().TimeNome;
 
-                var ultimoColocado = times.Last();
-                retorno += $"Último colocado: {ultimoColocado.TimeNome} com {ultimoColocado.Pontos} ponto(s)!\n\n";
+                List<object> finalizar = new List<object>
+                {
+                    new { Ganhador = ganhador, UltimoColocado =ultimoColocado },
+                };
+
+                string finalizarJson = JsonSerializer.Serialize(finalizar);
 
                 _ctx.Campeonatos.Remove(campeonato);
                 _ctx.SaveChanges();
 
-                retorno += "Campeonato Finalizado!";
-                return Ok(retorno);
+                return Ok(finalizarJson);
             }
             catch (Exception e)
             {

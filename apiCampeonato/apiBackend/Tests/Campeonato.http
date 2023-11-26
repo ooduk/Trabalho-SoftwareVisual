@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7021/api/campeonato/analisar/6
+GET https://localhost:7021/api/campeonato/analisar/15
 
 ###
 
@@ -42,4 +42,4 @@ GET https://localhost:7021/api/campeonato/classificacaoDetalhes/1
 
 ### 
 
-GET https://localhost:7021/api/campeonato/finalizar/1
+DELETE https://localhost:7021/api/campeonato/finalizar/12

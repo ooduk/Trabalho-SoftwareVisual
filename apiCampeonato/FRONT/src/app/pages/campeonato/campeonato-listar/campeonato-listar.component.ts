@@ -16,7 +16,8 @@ export class CampeonatoListarComponent {
     "alterar",
     "classificacao",
     "classificacaoDetalhada",
-    "analisar"
+    "analisar",
+    "finalizar"
   ];
   campeonatos: Campeonato[] = [];
 

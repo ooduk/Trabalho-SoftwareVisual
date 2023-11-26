@@ -12,6 +12,7 @@ import { CampeonatoClassificacaoComponent } from "./pages/campeonato/campeonato-
 import { CampeonatoClassificacaoDetalhadaComponent } from "./pages/campeonato/campeonato-classificacao-detalhada/campeonato-classificacao-detalhada.component";
 import { CampeonatoAnalisarComponent } from "./pages/campeonato/campeonato-analisar/campeonato-analisar.component";
 import { ConfrontoCadastrarComponent } from "./pages/confronto/confronto-cadastrar/confronto-cadastrar.component";
+import { CampeonatoFinalizarComponent } from "./pages/campeonato/campeonato-finalizar/campeonato-finalizar.component";
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: "pages/campeonato/analisar/:id",
     component: CampeonatoAnalisarComponent,
+  },
+  {
+    path: "pages/campeonato/finalizar/:id",
+    component: CampeonatoFinalizarComponent,
   },
 ];
 

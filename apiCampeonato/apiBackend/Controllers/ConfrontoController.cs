@@ -190,8 +190,8 @@ namespace apiBackend.Controllers
                         _ctx.SaveChanges();
                     }
 
-                    Vencer(timeVenceuCadastro, golsFora, golsCasa);
-                    Perder(timePerdeuCadastro, golsCasa, golsFora);
+                    Vencer(timeVenceuCadastro, golsCasa, golsFora);
+                    Perder(timePerdeuCadastro, golsFora, golsCasa);
 
                     return true;
                 }

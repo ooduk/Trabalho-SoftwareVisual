@@ -1,32 +1,27 @@
-import { Analise } from './../../../models/AnaliseModel';
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute } from "@angular/router";
+import { Finalizar } from "src/app/models/FinalizarModel";
 
 @Component({
-  selector: "app-campeonato-analisar",
-  templateUrl: "./campeonato-analisar.component.html",
-  styleUrls: ["./campeonato-analisar.component.css"],
+  selector: "app-campeonato-finalizar",
+  templateUrl: "./campeonato-finalizar.component.html",
+  styleUrls: ["./campeonato-finalizar.component.css"],
 })
-export class CampeonatoAnalisarComponent {
+export class CampeonatoFinalizarComponent {
   colunasTabela: string[] = [
-    "timeVitorias",
-    "timeDerrotas",
-    "timeEmpates",
-    "timeMaisGolsMarcados",
-    "timeMenosGolsMarcados",
-    "timeMaisGolsSofridos",
-    "timeMenosGolsSofridos"
+    "ganhador",
+    "ultimoColocado",
   ];
-  analise : Analise[] = [];
+  finalizar : Finalizar[] = []
 
   constructor(
     private client: HttpClient,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute
-  )
-  {
+  ) {
+    
   }
 
   ngOnInit(): void {
@@ -34,12 +29,13 @@ export class CampeonatoAnalisarComponent {
       next: (parametros) => {
         let { id } = parametros;  
             this.client
-              .get<Analise[]>(
-                `https://localhost:7021/api/campeonato/analisar/${id}`
+              .delete<Finalizar[]>(
+                `https://localhost:7021/api/campeonato/finalizar/${id}`
               )
               .subscribe({
-                next: (analise) => {
-                  this.analise = analise;
+                next: (finalizar) => {
+                  console.table(finalizar)
+                  this.finalizar = finalizar;
                 },
                 error: (erro) => {
                   console.log(erro);
@@ -48,4 +44,5 @@ export class CampeonatoAnalisarComponent {
           },
     });
   }
+
 }

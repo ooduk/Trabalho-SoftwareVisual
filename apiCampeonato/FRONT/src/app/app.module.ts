@@ -29,6 +29,7 @@ import { CampeonatoClassificacaoComponent } from "./pages/campeonato/campeonato-
 import { CampeonatoClassificacaoDetalhadaComponent } from "./pages/campeonato/campeonato-classificacao-detalhada/campeonato-classificacao-detalhada.component";
 import { CampeonatoAnalisarComponent } from "./pages/campeonato/campeonato-analisar/campeonato-analisar.component";
 import { ConfrontoCadastrarComponent } from "./pages/confronto/confronto-cadastrar/confronto-cadastrar.component";
+import { CampeonatoFinalizarComponent } from "./pages/campeonato/campeonato-finalizar/campeonato-finalizar.component";
 // import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
 
 // import { TabelaCadastrarComponent} from "./pages/tabela/tabela-cadastrar/tabela-cadastrar.component";
@@ -50,6 +51,7 @@ import { ConfrontoCadastrarComponent } from "./pages/confronto/confronto-cadastr
     CampeonatoClassificacaoComponent,
     CampeonatoClassificacaoDetalhadaComponent,
     CampeonatoAnalisarComponent,
+    CampeonatoFinalizarComponent,
     ConfrontoListarComponent,
     ConfrontoCadastrarComponent
   ],
