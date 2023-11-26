@@ -169,15 +169,16 @@ namespace apiBackend.Controllers
                         var timeMenosGolsSofridos = times.OrderByDescending(t => t.Gols_contra).Last().TimeNome;
 
                         retorno += $"Time com Mais Vitórias: {timeVitorias}\nTime com Mais Derrotas: {timeDerrotas}\nTime com Mais Empates: {timeEmpates}\nTime com Mais Gols Marcados: {timeMaisGolsMarcados}\nTime com Menos Gols Marcados: {timeMenosGolsMarcados}\nTime com Mais Gols Sofridos: {timeMaisGolsSofridos}\nTime com Menos Gols Sofridos: {timeMenosGolsSofridos}";
-                        
-                        var analise = new {
+
+                        var analise = new
+                        {
                             timeVitorias = timeVitorias,
-                            timeDerrotas= timeDerrotas,
+                            timeDerrotas = timeDerrotas,
                             timeEmpates = timeEmpates,
-                            timeMaisGolsMarcados =timeMaisGolsMarcados,
-                            timeMenosGolsMarcados= timeMenosGolsMarcados,
-                            timeMaisGolsSofridos =timeMaisGolsSofridos,
-                            timeMenosGolsSofridos= timeMenosGolsSofridos,
+                            timeMaisGolsMarcados = timeMaisGolsMarcados,
+                            timeMenosGolsMarcados = timeMenosGolsMarcados,
+                            timeMaisGolsSofridos = timeMaisGolsSofridos,
+                            timeMenosGolsSofridos = timeMenosGolsSofridos,
                         };
 
                         return Ok(analise);
@@ -211,18 +212,6 @@ namespace apiBackend.Controllers
 
                 if (times.Count() != 0)
                 {
-                    var campeonatoNome = times.First().CampeonatoNome;
-
-                    string retorno = $"Classificação: {campeonatoNome}\n\n";
-
-                    int classificacao = 1;
-
-                    foreach (var time in times)
-                    {
-                        retorno += $"{classificacao}º {time.TimeNome} - {time.Pontos} Pontos\n";
-
-                        classificacao++;
-                    }
                     return Ok(times);
                 }
                 return NotFound();
@@ -286,7 +275,7 @@ namespace apiBackend.Controllers
             try
             {
                 Campeonato? campeonato = _ctx.Campeonatos.Find(id);
-                
+
                 List<TabelaReturn> times = _ctx.Tabelas
                 .Where(t => t.CampeonatoId == id)
                 .Include(t => t.Time)
@@ -300,7 +289,8 @@ namespace apiBackend.Controllers
                 })
                 .ToList();
 
-                if((campeonato == null) || (times.Count == 0)){
+                if ((campeonato == null) || (times.Count == 0))
+                {
                     return NotFound();
                 }
 

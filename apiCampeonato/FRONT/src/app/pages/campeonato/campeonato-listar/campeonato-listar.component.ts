@@ -10,13 +10,13 @@ import { Campeonato } from './../../../models/CampeonatoModel';
 })
 export class CampeonatoListarComponent {
   colunasTabela: string[] = [
-    "campeonatoId",
     "nome",
     "premiacao",
     "deletar",
     "alterar",
     "classificacao",
-    "classificacaoDetalhada"
+    "classificacaoDetalhada",
+    "analisar"
   ];
   campeonatos: Campeonato[] = [];
 

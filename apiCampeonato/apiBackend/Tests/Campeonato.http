@@ -30,11 +30,11 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7021/api/campeonato/analisar/1
+GET https://localhost:7021/api/campeonato/analisar/6
 
 ###
 
-GET https://localhost:7021/api/campeonato/classificacao/1
+GET https://localhost:7021/api/campeonato/classificacao/6
 
 ###
 

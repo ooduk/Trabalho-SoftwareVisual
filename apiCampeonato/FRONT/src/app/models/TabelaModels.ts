@@ -1,11 +1,11 @@
 export interface Tabela{
      TabelaId?: number;
-     CampeonatoId?: number;
-     TimeId?: number;
-     Pontos?: number;
-     Gols_marcados: number;
-     Gols_contra: number;
-     Vitorias: number;
-     Empates: number;
-     Derrotas: number;
+     timeNome?: number;
+     campeonatoNome: string;
+     pontos?: number;
+     gols_marcados: number;
+     gols_contra: number;
+     vitorias: number;
+     empates: number;
+     derrotas: number;
 }

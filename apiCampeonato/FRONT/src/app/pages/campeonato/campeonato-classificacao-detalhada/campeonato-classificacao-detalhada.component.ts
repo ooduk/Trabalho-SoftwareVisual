@@ -1,20 +1,24 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Campeonato } from '../../../models/CampeonatoModel';
 import { Tabela } from "src/app/models/TabelaModels";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: "app-campeonato-classificacao",
-  templateUrl: "./campeonato-classificacao.component.html",
-  styleUrls: ["./campeonato-classificacao.component.css"],
+  selector: "app-campeonato-classificacao-detalhada",
+  templateUrl: "./campeonato-classificacao-detalhada.component.html",
+  styleUrls: ["./campeonato-classificacao-detalhada.component.css"],
 })
-export class CampeonatoClassificacaoComponent {
+export class CampeonatoClassificacaoDetalhadaComponent {
   colunasTabela: string[] = [
     "tabelaId",
     "timeNome",
-    "pontos"
+    "pontos",
+    "gols_marcados",
+    "gols_contra",
+    "vitorias",
+    "empates",
+    "derrotas"
   ];
   tabelas: Tabela[] = [];
 
@@ -32,7 +36,7 @@ export class CampeonatoClassificacaoComponent {
         let { id } = parametros;  
             this.client
               .get<Tabela[]>(
-                `https://localhost:7021/api/campeonato/classificacao/${id}`
+                `https://localhost:7021/api/campeonato/classificacaoDetalhes/${id}`
               )
               .subscribe({
                 next: (tabelas) => {

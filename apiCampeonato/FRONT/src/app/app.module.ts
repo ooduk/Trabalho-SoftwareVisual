@@ -25,6 +25,9 @@ import { CampeonatoCadastrarComponent} from "./pages/campeonato/campeonato-cadas
 import { CampeonatoAlterarComponent} from "./pages/campeonato/campeonato-alterar/campeonato-alterar.component";
 import { ConfrontoListarComponent } from "./pages/confronto/confronto-listar/confronto-listar.component";
 import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
+import { CampeonatoClassificacaoComponent } from "./pages/campeonato/campeonato-classificacao/campeonato-classificacao.component";
+import { CampeonatoClassificacaoDetalhadaComponent } from "./pages/campeonato/campeonato-classificacao-detalhada/campeonato-classificacao-detalhada.component";
+import { CampeonatoAnalisarComponent } from "./pages/campeonato/campeonato-analisar/campeonato-analisar.component";
 // import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
 
 // import { TabelaCadastrarComponent} from "./pages/tabela/tabela-cadastrar/tabela-cadastrar.component";
@@ -39,11 +42,14 @@ import { TimeHistoricoComponent } from "./pages/time/time-historico/time-histori
     TimeListarComponent,
     TimeCadastrarComponent,
     TimeAlterarComponent,
+    TimeHistoricoComponent,
     CampeonatoAlterarComponent,
     CampeonatoCadastrarComponent,
     CampeonatoListarComponent,
+    CampeonatoClassificacaoComponent,
+    CampeonatoClassificacaoDetalhadaComponent,
+    CampeonatoAnalisarComponent,
     ConfrontoListarComponent,
-    TimeHistoricoComponent
   ],
   imports: [
     BrowserModule,

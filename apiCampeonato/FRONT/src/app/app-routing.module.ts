@@ -8,6 +8,9 @@ import { CampeonatoListarComponent } from "./pages/campeonato/campeonato-listar/
 import { ConfrontoListarComponent } from "./pages/confronto/confronto-listar/confronto-listar.component";
 import { TimeHistoricoComponent } from "./pages/time/time-historico/time-historico.component";
 import { CampeonatoAlterarComponent } from "./pages/campeonato/campeonato-alterar/campeonato-alterar.component";
+import { CampeonatoClassificacaoComponent } from "./pages/campeonato/campeonato-classificacao/campeonato-classificacao.component";
+import { CampeonatoClassificacaoDetalhadaComponent } from "./pages/campeonato/campeonato-classificacao-detalhada/campeonato-classificacao-detalhada.component";
+import { CampeonatoAnalisarComponent } from "./pages/campeonato/campeonato-analisar/campeonato-analisar.component";
 
 const routes: Routes = [
   {
@@ -45,6 +48,18 @@ const routes: Routes = [
   {
     path: "pages/time/historico/:id",
     component: TimeHistoricoComponent,
+  },
+  {
+    path: "pages/campeonato/classificacao/:id",
+    component: CampeonatoClassificacaoComponent,
+  },
+  {
+    path: "pages/campeonato/classificacaoDetalhada/:id",
+    component: CampeonatoClassificacaoDetalhadaComponent,
+  },
+  {
+    path: "pages/campeonato/analisar/:id",
+    component: CampeonatoAnalisarComponent,
   },
 ];
 

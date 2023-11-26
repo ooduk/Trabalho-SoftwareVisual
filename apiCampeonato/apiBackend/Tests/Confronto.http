@@ -6,9 +6,9 @@ POST https://localhost:7021/api/confronto/cadastrar
 Content-Type: application/json
 
 {
-    "timeCasaId": 5,
-    "timeForaId": 6,
-    "campeonatoId": 1,
+    "timeCasaId": 11,
+    "timeForaId": 12,
+    "campeonatoId": 6,
     "gols_time_casa": 3,
     "gols_time_fora": 2
 }
