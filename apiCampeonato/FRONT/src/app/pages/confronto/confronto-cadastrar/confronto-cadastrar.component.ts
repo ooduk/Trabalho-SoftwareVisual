@@ -7,7 +7,7 @@ import { Confronto } from "src/app/models/ConfrontoModels";
 import { Time } from "src/app/models/TimeModel";
 
 @Component({
-  selector: "confronto-cadastrar-produto",
+  selector: "app-confronto-cadastrar",
   templateUrl: "./confronto-cadastrar.component.html",
   styleUrls: ["./confronto-cadastrar.component.css"],
 })
